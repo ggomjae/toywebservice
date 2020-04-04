@@ -2,6 +2,15 @@ plugins {
     id 'org.springframework.boot' version '2.2.6.RELEASE'
     id 'io.spring.dependency-management' version '1.0.9.RELEASE'
     id 'java'
+    id "com.moowork.node" version "1.3.1"
+}
+
+node {
+    version = '12.14.1'
+    npmVersion = '6.13.4'
+    workDir = file("./src/fronted")
+    npmWorkDir = file("./src/fronted")
+    nodeModulesDir = file("./src/fronted")
 }
 
 group = 'com.ggomjae.web'
@@ -19,6 +28,20 @@ dependencies {
         exclude group: 'org.junit.vintage', module: 'junit-vintage-engine'
     }
 }
+
+task setUp(type: NpmTask){
+    description = "Install Node.js packages"
+    args = ['install']
+    inputs.files file('package.json')
+    outputs.files file('node_modules')
+}
+
+task buildFrontEnd(type: NpmTask, dependsOn : setUp){
+    description = "Build vue.js"
+    args = ['run','build']
+}
+
+processResources.dependsOn 'buildFrontEnd'
 
 test {
     useJUnitPlatform()
