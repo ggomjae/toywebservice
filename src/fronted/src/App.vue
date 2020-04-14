@@ -1,28 +1,38 @@
 <template>
   <div id = "app">
-    <TodoHeader></TodoHeader>
-    <TodoInput></TodoInput>
-    <TodoList></TodoList>
-    <TodoFooter></TodoFooter>
+    <Title></Title>
+    <Pocket></Pocket>
   </div>
 </template>
 
 <script>
-  import TodoHeader from "./components/TodoHeader";
-  import TodoList from "./components/TodoList";
-  import TodoFooter from "./components/TodoFooter";
-  import TodoInput from "./components/TodoInput";
+  import Title from "./components/Title";
+  import Pocket from "./components/Pocket";
 
   export default {
     components : {
-      'TodoHeader' : TodoHeader,
-      'TodoInput' : TodoInput,
-      'TodoList' : TodoList,
-      'TodoFooter' : TodoFooter
+      'Title' : Title,
+      'Pocket' : Pocket
     }
   }
 </script>
 
 <style>
+  body{
+    text-align: center;
+    background: #F6F6F8;
+  }
 
+  input{
+    border-style: groove;
+    width: 200px;
+  }
+
+  button{
+    border-style: groove;
+  }
+
+  .shadow{
+    box-shadow: 5px 10px 10px rgba(0,0,0,0.03);
+  }
 </style>
