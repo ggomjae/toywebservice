@@ -22,9 +22,15 @@
 
     .pocketContainer{
         background: white;
+        width : 290px;
         height: 50px;
         line-height: 50px;
         border-radius: 5px;
+        position: absolute;
+        left:50%;
+        top:50%;
+        margin-left:-150px;
+        margin-top:50px;
     }
 
     .addContainer{
