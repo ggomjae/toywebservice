@@ -17,8 +17,7 @@
 
 <script>
     export default {
-        name: "List",
-
+        name: "List"
     }
 </script>
 
@@ -28,7 +27,7 @@
         left:50%;
         top:50%;
         margin-left:-80px;
-        margin-top:120px;
+        margin-top:50px;
     }
 
     ul{
@@ -57,5 +56,10 @@
     #goOptionBtn{
         padding-left: 115px;
     }
+
+    #goOptionBtn:hover, #goBoardBtn:hover{
+        cursor: pointer;
+    }
+
 
 </style>

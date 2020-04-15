@@ -4,15 +4,28 @@
         <span class= "addContainer" v-on:click="open">
             <i class="addBtn fas fa-plus" aria-hidden="true"></i>
         </span>
+        <transition name ="fade">
+            <List v-if="listStatus"></List>
+        </transition>
     </div>
 </template>
 
 <script>
+    import List from "./List";
+
     export default {
+        components : {
+            'List' : List
+        },
         name: "Pocket",
+        data(){
+            return{
+                listStatus : false
+            }
+        },
         methods:{
             open() {
-                console.log('click');
+                this.listStatus = !this.listStatus;
             }
         }
     }
@@ -43,5 +56,17 @@
     .addBtn{
         color: white;
         vertical-align: middle;
+    }
+
+    .addContainer:hover{
+        background: #7ec699;
+        cursor: pointer;
+    }
+
+    .fade-enter-active, .fade-leave-active {
+        transition: opacity 1s;
+    }
+    .fade-enter, .fade-leave-to {
+        opacity: 0;
     }
 </style>

@@ -1,5 +1,7 @@
 <template>
-    <h1>DaSa 2</h1>
+    <div>
+        <h1>DaSa 2</h1>
+    </div>
 </template>
 
 <script>

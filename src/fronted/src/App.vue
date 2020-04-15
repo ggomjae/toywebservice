@@ -2,20 +2,17 @@
   <div id = "app">
     <Title></Title>
     <Pocket></Pocket>
-    <List></List>
   </div>
 </template>
 
 <script>
   import Title from "./components/Title";
   import Pocket from "./components/Pocket";
-  import List from "./components/List";
 
   export default {
     components : {
       'Title' : Title,
-      'Pocket' : Pocket,
-      'List' : List
+      'Pocket' : Pocket
     }
   }
 </script>
