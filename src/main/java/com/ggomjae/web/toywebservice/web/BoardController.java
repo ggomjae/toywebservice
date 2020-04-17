@@ -4,15 +4,10 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-public class HelloWorld {
+public class BoardController {
 
-    @GetMapping("/")
-    public String init(){
-        return "init";
-    }
-
-    @GetMapping("/api/hello")
+    @GetMapping("/api/board")
     public String hello(){
-        return "hello";
+        return "board";
     }
 }
