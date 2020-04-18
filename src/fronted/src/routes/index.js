@@ -3,21 +3,21 @@ import VueRouter from 'vue-router'
 
 Vue.use(VueRouter)
 
-import Pocket from '../components/Pocket.vue'
-import Title from '../components/Title.vue'
+import Board from '../views/Board.vue'
+import Enter from '../views/Enter.vue'
 
 export const router = new VueRouter({
     mode: 'history',
     routes: [
         {
-            path: '/title',
-            component: Title,
-            name: 'Title'
+            path: '/enter',
+            component: Enter,
+            name: 'Enter'
         },
         {
-            path: '/pocket',
-            component: Pocket,
-            name: 'Pocket'
+            path: '/board',
+            component: Board,
+            name: 'Board'
         }
     ]
 })

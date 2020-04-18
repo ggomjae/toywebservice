@@ -1,20 +1,18 @@
 <template>
   <div id = "app">
     <router-view></router-view>
-    <Title></Title>
-    <Pocket></Pocket>
   </div>
 </template>
 
 <script>
-  //import Title from "./components/Title";
-  //import Pocket from "./components/Pocket";
+  //import Board from "./views/Board";
+  //import Enter from "./views/Enter";
 
   export default {
     name : 'App',
     components : {
-    //  'Title' : Title,
-    //  'Pocket' : Pocket
+      //  'Board' : Board,
+      // 'Enter' : Enter
     }
   }
 </script>
