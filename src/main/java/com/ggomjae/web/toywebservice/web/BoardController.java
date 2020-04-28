@@ -8,6 +8,6 @@ public class BoardController {
 
     @GetMapping("/api/board")
     public String hello(){
-        return "board";
+        return "Gomjae";
     }
 }
