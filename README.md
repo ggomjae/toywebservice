@@ -6,9 +6,9 @@ Author 민경재 <br>
 2020.04.04 ~ ING <br>
 
 ### version 1.0.0
->1.vue + springboot 연동
->2.vue router - /enter , /board
->3.front ----> server.data return ----->front
+>>1.vue + springboot 연동<br>
+>>2.vue router - /enter , /board<br>
+>>3.front ----> server.data return ----->front<br>
 
 ### Screenshots
 
