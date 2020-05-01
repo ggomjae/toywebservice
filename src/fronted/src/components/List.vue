@@ -1,6 +1,11 @@
 <template>
    <section class="listContainer">
        <ul>
+           <li> Profile
+               <span v-on:click="link" id="goProfileBtn">
+                   <i class="checkBtn fas fa-check" aria-hidden="true"></i>
+               </span>
+           </li>
            <li> Board
                <span id="goBoardBtn">
                    <i class="checkBtn fas fa-check" aria-hidden="true"></i>
@@ -17,7 +22,12 @@
 
 <script>
     export default {
-        name: "List"
+        name: "List",
+        methods :{
+            link : function () {
+                this.$router.push('/board')
+            }
+        }
     }
 </script>
 
@@ -49,6 +59,10 @@
         border-radius: 5px;
     }
 
+    #goProfileBtn{
+        padding-left: 127px;
+    }
+
     #goBoardBtn{
         padding-left: 130px;
     }
@@ -57,7 +71,7 @@
         padding-left: 115px;
     }
 
-    #goOptionBtn:hover, #goBoardBtn:hover{
+    #goOptionBtn:hover, #goBoardBtn:hover, #goProfileBtn:hover{
         cursor: pointer;
     }
 
