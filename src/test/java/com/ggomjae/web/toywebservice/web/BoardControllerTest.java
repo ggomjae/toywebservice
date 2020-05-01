@@ -33,12 +33,12 @@ public class BoardControllerTest {
         String name = "gae";
         int amount = 28;
 
-//        mvc.perform(get("/api/board/dto")
-//        .param("name",name)
-//        .param("amount",String.valueOf(amount)))
-//                .andExpect(status().isOk())
-//                .andExpect(jsonPath("$.name",is(name)))
-//                .andExpect(jsonPath("$.amount",is(amount)));
+        mvc.perform(get("/api/board/dto")
+        .param("name",name)
+        .param("amount",String.valueOf(amount)))
+                .andExpect(status().isOk())
+                .andExpect(jsonPath("$.name",is(name)))
+                .andExpect(jsonPath("$.amount",is(amount)));
 
     }
 

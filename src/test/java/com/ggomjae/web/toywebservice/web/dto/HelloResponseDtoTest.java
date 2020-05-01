@@ -18,8 +18,4 @@ public class HelloResponseDtoTest {
         assertThat(dto.getAmount()).isEqualTo(amount);
     }
 
-    @GetMapping("/api/board/dto")
-    public HelloResponseDto boardDto(@RequestParam("name") String name, @RequestParam("amount") int amount){
-        return new HelloResponseDto(name,amount);
-    }
 }
