@@ -5,6 +5,7 @@ Vue.use(VueRouter)
 
 import Board from '../views/Board.vue'
 import Enter from '../views/Enter.vue'
+import Profile from '../views/Profile.vue'
 
 export const router = new VueRouter({
     mode: 'history',
@@ -18,6 +19,11 @@ export const router = new VueRouter({
             path: '/board',
             component: Board,
             name: 'Board'
-        }
+        },
+        {
+            path: '/profile',
+            component: Profile,
+            name: 'Profile'
+        },
     ]
 })

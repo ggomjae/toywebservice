@@ -5,12 +5,19 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
+import java.util.Map;
+
 @RestController
 public class BoardController {
 
     @GetMapping("/api/board")
-    public String hello(){
-        return "Gomjae";
+    public Map<String,String> hello(){
+        Map<String,String> person = new HashMap<String, String>();
+        person.put("name","KimDaMi");
+        person.put("age","25");
+
+        return person;
     }
 
     @GetMapping("/api/board/dto")

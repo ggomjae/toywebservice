@@ -2,12 +2,12 @@
    <section class="listContainer">
        <ul>
            <li> Profile
-               <span v-on:click="link" id="goProfileBtn">
+               <span v-on:click="goProfile" id="goProfileBtn">
                    <i class="checkBtn fas fa-check" aria-hidden="true"></i>
                </span>
            </li>
            <li> Board
-               <span id="goBoardBtn">
+               <span v-on:click="goBoard" id="goBoardBtn">
                    <i class="checkBtn fas fa-check" aria-hidden="true"></i>
                </span>
            </li>
@@ -24,8 +24,11 @@
     export default {
         name: "List",
         methods :{
-            link : function () {
+            goBoard : function () {
                 this.$router.push('/board')
+            },
+            goProfile : function () {
+                this.$router.push('/profile')
             }
         }
     }
