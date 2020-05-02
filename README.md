@@ -23,6 +23,6 @@ Author 민경재 <br>
 
 >[2020.05.01] : profile add , router<br>
 <div>
-    <img width ="300" src = "https://user-images.githubusercontent.com/43604493/80813032-337fe900-8c04-11ea-8fc3-7c42a6fbac01.JPG">
-    <img width ="300" src = "https://user-images.githubusercontent.com/43604493/80813549-2adbe280-8c05-11ea-8523-5019637cdfe5.JPG">
+    <img height="150" width ="200" src = "https://user-images.githubusercontent.com/43604493/80853759-37e0ec00-8c6e-11ea-9357-6a478b1f5107.JPG">
+    <img height="150" width ="200" src = "https://user-images.githubusercontent.com/43604493/80853756-36afbf00-8c6e-11ea-80e6-cc745d3dff2c.JPG">
 </div>
