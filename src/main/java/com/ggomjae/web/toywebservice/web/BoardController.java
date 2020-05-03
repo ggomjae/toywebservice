@@ -6,6 +6,7 @@ import com.ggomjae.web.toywebservice.web.dto.PostsResponseDto;
 import com.ggomjae.web.toywebservice.web.dto.PostsSaveRequestDto;
 
 import com.ggomjae.web.toywebservice.web.dto.PostsUpdateRequestDto;
+import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,15 +18,6 @@ import java.util.Map;
 public class BoardController {
 
     private final PostsService postsService;
-
-    @GetMapping("/api/board")
-    public Map<String,String> hello(){
-        Map<String,String> person = new HashMap<String, String>();
-        person.put("name","KimDaMi");
-        person.put("age","25");
-
-        return person;
-    }
 
     @PostMapping("/api/board/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
@@ -40,6 +32,12 @@ public class BoardController {
     @GetMapping("/api/board/posts/{id}")
     public PostsResponseDto findById(@PathVariable Long id){
         return postsService.findById(id);
+    }
+
+    ///////////////////////////////////////
+    @GetMapping("/api/board/test")
+    public String testing(){
+        return "test~ing";
     }
 
     @GetMapping("/api/board/dto")
