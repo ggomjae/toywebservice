@@ -1,6 +1,6 @@
 <template>
     <div>
-        <h1><span id = 'titleImage'></span>
+        <h1><span id = 'titleImage' v-on:click="gotoEnter"></span>
             DaSa 2
         </h1>
     </div>
@@ -8,7 +8,12 @@
 
 <script>
     export default {
-        name: "Title"
+        name: "Title",
+        methods :{
+            gotoEnter : function () {
+                window.open("/enter","_self");
+            }
+        }
     }
 </script>
 
@@ -32,6 +37,11 @@
     }
 
     #titleImage{
-        background-image: url('../assets/dami.png');
+        background-image: url('../assets/kimdami.png');
     }
+
+    #titleImage:hover{
+        cursor: pointer;
+    }
+
 </style>
