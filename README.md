@@ -5,11 +5,12 @@ vue + springboot
 Author 민경재 <br>
 2020.04.04 ~ ING <br>
 
-### version 1.0
+### 개발 상황
 >1.vue + springboot 연동<br>
 >2.vue router - /enter , /board<br>
 >3.front ----> server.data return ----->front<br>
->4.profile component add + &router  
+>4.profile component add , &router 
+>5.vue-good-table , backend : save.update - service,controller,dto  
 ### Screenshots
 >[2020.04.29] :구조 및 1,2,3 스크린샷 <br>
 <div>
@@ -21,8 +22,7 @@ Author 민경재 <br>
     <img width ="300" src = "https://user-images.githubusercontent.com/43604493/80437113-bcb0ca80-893b-11ea-932e-fabff2ea0c47.JPG">
 </div>
 
->[2020.05.01] : profile add , router<br>
+>[2020.05.03] : 4,5 스크린샷 <br>
 <div>
-    <img height="150" width ="200" src = "https://user-images.githubusercontent.com/43604493/80853759-37e0ec00-8c6e-11ea-9357-6a478b1f5107.JPG">
-    <img height="150" width ="200" src = "https://user-images.githubusercontent.com/43604493/80853756-36afbf00-8c6e-11ea-80e6-cc745d3dff2c.JPG">
+    <img height="300" src = "https://user-images.githubusercontent.com/43604493/80930510-f9266f80-8dee-11ea-83f1-1316b26e1189.JPG">
 </div>
