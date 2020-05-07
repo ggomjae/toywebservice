@@ -4,7 +4,7 @@ vue + springboot
 - 
 Author 민경재 <br>
 2020.04.04 ~ ING <br>
-
+* 블로그 링크 <https://blog.naver.com/ggomjae/221890680558> <br>
 ### 개발 상황
 >1.vue + springboot 연동<br>
 >2.vue router - /enter , /board<br>
