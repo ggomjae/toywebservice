@@ -11,6 +11,7 @@ Author 민경재 <br>
 >3.front ----> server.data return ----->front<br>
 >4.profile component add , &router 
 >5.vue-good-table , backend : save.update - service,controller,dto  
+>6.BoardContent Fronted <-> BackEnd, PC,모바일에 따른 @Media 적용 등 [#24] commit 내용
 ### Screenshots
 >[2020.04.29] :구조 및 1,2,3 스크린샷 <br>
 <div>
@@ -25,4 +26,9 @@ Author 민경재 <br>
 >[2020.05.03] : 4,5 스크린샷 <br>
 <div>
     <img height="300" src = "https://user-images.githubusercontent.com/43604493/80930510-f9266f80-8dee-11ea-83f1-1316b26e1189.JPG">
+</div>
+
+>[2020.05.08] : 6 스크린샷 <br>
+<div>
+    <img height="300" src = "https://user-images.githubusercontent.com/43604493/81408988-3b4a0b00-9179-11ea-8987-16c56b2c0f4b.JPG">
 </div>
