@@ -1,10 +1,10 @@
 <template>
     <div>
-        <h3>{{ content }}</h3>
         <vue-good-table
                 id="table"
                 :columns="columns"
-                :rows="rows">
+                :rows="rows"
+                @on-row-click="onRowClick">
         </vue-good-table>
     </div>
 </template>
@@ -24,38 +24,56 @@
                 content : '',
                 columns: [
                     {
-                        label: 'Title',
-                        field: 'Title',
+                        label: '작성자',
+                        field: 'author',
+                        sortable: false,
                     },
                     {
-                        label: 'Author',
-                        field: 'Author',
+                        label: '제목',
+                        field: 'title',
+                        sortable: false,
                     },
+                    {
+                        label: '날짜',
+                        field: 'modifiedDate',
+                        type: 'date',
+                        inputFormat: 'DD-MM-YYYY HH:mm',
+                        outputFormat: 'DD-MM-YYYY HH:mm'
+                    }
                 ],
-                rows: [
-                    { Title:"gom e da", Author: "Gomjae"},
-                    { Title:"pig da", Author: "KyungJae"},
-                ]
+                rows: []
             }
         },
-        created() {
-            axios.get('http://localhost:8081/api/board/test')
-                .then(response => {
-                    this.content = response.data;
-                    console.log(response.data);
-                }).catch( e=>{
+        methods : {
+            getRevisions() {
+                axios.get('http://localhost:8081/api/board/test')
+                    .then(response => {
+                        this.content = response.data;
+                        this.rows = response.data;
+                        console.log(response);
+                    }).catch( e=>{
                     console.log('error:',e)
-            })
+                })
+            },
+            onRowClick(params){
+                console.log(params);
+                console.log(params.row.id);
+            }
+        },
+        mounted() {
+            this.getRevisions();
         }
     }
 </script>
 
 <style scoped>
     #table{
-        position: absolute;
-        left:50%;
-        top:50%;
-        margin-left:-100px;
-        margin-top:100px;
+        margin: 0 auto;
+    }
+
+    @media screen and (min-width: 768px){
+        #table{
+            width: 752px;
+        }
     }
 </style>

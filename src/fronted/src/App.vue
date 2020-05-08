@@ -1,18 +1,16 @@
 <template>
   <div id = "app">
     <router-view></router-view>
+    <Foot></Foot>
   </div>
 </template>
 
 <script>
-  //import Board from "./views/Board";
-  //import Enter from "./views/Enter";
-
+  import Foot from "./components/Foot";
   export default {
     name : 'App',
     components : {
-      //  'Board' : Board,
-      // 'Enter' : Enter
+        'Foot' : Foot
     }
   }
 </script>

@@ -60,6 +60,8 @@
         padding:0 0.9rem;
         background: white;
         border-radius: 5px;
+        box-shadow: 0.5px 1px 0px 0px rgba(0,0,0,.2);
+
     }
 
     #goProfileBtn{
@@ -77,6 +79,5 @@
     #goOptionBtn:hover, #goBoardBtn:hover, #goProfileBtn:hover{
         cursor: pointer;
     }
-
 
 </style>

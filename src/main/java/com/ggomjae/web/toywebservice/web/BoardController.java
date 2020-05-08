@@ -1,16 +1,14 @@
 package com.ggomjae.web.toywebservice.web;
 
 import com.ggomjae.web.toywebservice.service.PostsService;
-import com.ggomjae.web.toywebservice.web.dto.HelloResponseDto;
-import com.ggomjae.web.toywebservice.web.dto.PostsResponseDto;
-import com.ggomjae.web.toywebservice.web.dto.PostsSaveRequestDto;
+import com.ggomjae.web.toywebservice.web.dto.*;
 
-import com.ggomjae.web.toywebservice.web.dto.PostsUpdateRequestDto;
 import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 @RequiredArgsConstructor
@@ -36,10 +34,11 @@ public class BoardController {
 
     ///////////////////////////////////////
     @GetMapping("/api/board/test")
-    public String testing(){
-        return "test~ing";
-    }
+    public List<PostsListResponseDto> testing(){
 
+        return postsService.findAllDesc();
+    }
+    //////////////////////////////////////////
     @GetMapping("/api/board/dto")
     public HelloResponseDto boardDto(@RequestParam("name") String name, @RequestParam("amount") int amount){
         return new HelloResponseDto(name,amount);

@@ -24,6 +24,11 @@
         font-weight: 900;
         margin: 5rem 0 1.5rem;
     }
+    @media screen and (min-width: 768px) and (min-height: 900px){
+       h1{
+           margin: 10rem 0 1.5rem;
+       }
+    }
 
     #titleImage{
         text-align: center;
