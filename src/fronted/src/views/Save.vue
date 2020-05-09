@@ -1,5 +1,6 @@
 <template>
     <div>
+        <Title></Title>
         <Post></Post>
     </div>
 
@@ -7,11 +8,13 @@
 
 <script>
     import Post from "../components/Post";
+    import Title from "../components/Title";
 
     export default {
         name: "Save",
         components : {
-            'Post' : Post
+            'Post' : Post,
+            'Title' : Title
         }
     }
 </script>

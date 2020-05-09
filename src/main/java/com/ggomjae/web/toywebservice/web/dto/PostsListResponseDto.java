@@ -2,9 +2,11 @@ package com.ggomjae.web.toywebservice.web.dto;
 
 import com.ggomjae.web.toywebservice.domain.posts.Posts;
 import lombok.Getter;
+import lombok.Setter;
 
 import java.time.LocalDateTime;
 
+@Setter
 @Getter
 public class PostsListResponseDto {
     private Long id;

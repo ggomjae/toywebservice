@@ -39,9 +39,6 @@
         border-radius: 30px 30px;
         background-size: cover;
         margin-right: 1.1rem;
-    }
-
-    #titleImage{
         background-image: url('../assets/kimdami.png');
     }
 

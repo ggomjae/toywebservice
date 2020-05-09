@@ -3,13 +3,13 @@ package com.ggomjae.web.toywebservice.web;
 import com.ggomjae.web.toywebservice.service.PostsService;
 import com.ggomjae.web.toywebservice.web.dto.*;
 
-import jdk.nashorn.internal.objects.annotations.Getter;
 import lombok.RequiredArgsConstructor;
 import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.List;
-import java.util.Map;
+
 
 @RequiredArgsConstructor
 @RestController
@@ -19,6 +19,7 @@ public class BoardController {
 
     @PostMapping("/api/board/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
+
         return postsService.save(requestDto);
     }
 
@@ -32,13 +33,15 @@ public class BoardController {
         return postsService.findById(id);
     }
 
-    ///////////////////////////////////////
-    @GetMapping("/api/board/test")
-    public List<PostsListResponseDto> testing(){
+    @GetMapping("/api/board/all")
+    public List<PostsListResponseDto> findAllPosts(){
 
-        return postsService.findAllDesc();
+        List<PostsListResponseDto> postAll = postsService.findAllDesc();
+
+        return postAll;
     }
-    //////////////////////////////////////////
+    //////////////////////////////////////////////////////////////////////////////////////////
+    //////////////////////test/////////////////////////////////////////////////////////////////
     @GetMapping("/api/board/dto")
     public HelloResponseDto boardDto(@RequestParam("name") String name, @RequestParam("amount") int amount){
         return new HelloResponseDto(name,amount);

@@ -6,7 +6,7 @@ Vue.use(VueRouter)
 import Board from '../views/Board.vue'
 import Enter from '../views/Enter.vue'
 import Profile from '../views/Profile.vue'
-import Save from "../views/Save.vue";
+import Save from '../views/Save.vue'
 
 export const router = new VueRouter({
     mode: 'history',

@@ -6,6 +6,9 @@
                 :rows="rows"
                 @on-row-click="onRowClick">
         </vue-good-table>
+        <div id="spanControl">
+            <span id = 'reg' v-on:click="gotoSave" />
+        </div>
     </div>
 </template>
 
@@ -21,7 +24,7 @@
         },
         data: ()=>{
             return {
-                content : '',
+                abd:'abc',
                 columns: [
                     {
                         label: '작성자',
@@ -37,8 +40,8 @@
                         label: '날짜',
                         field: 'modifiedDate',
                         type: 'date',
-                        inputFormat: 'DD-MM-YYYY HH:mm',
-                        outputFormat: 'DD-MM-YYYY HH:mm'
+                        dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS', // expects 2018-03-16
+                        dateOutputFormat: 'yyyy-MM-dd', // outputs Mar 16th 2018
                     }
                 ],
                 rows: []
@@ -46,11 +49,10 @@
         },
         methods : {
             getRevisions() {
-                axios.get('http://localhost:8081/api/board/test')
+                axios.get('/api/board/all')
                     .then(response => {
-                        this.content = response.data;
                         this.rows = response.data;
-                        console.log(response);
+                        console.log(response.data);
                     }).catch( e=>{
                     console.log('error:',e)
                 })
@@ -58,6 +60,9 @@
             onRowClick(params){
                 console.log(params);
                 console.log(params.row.id);
+            },
+            gotoSave : function () {
+                window.open("/save","_self");
             }
         },
         mounted() {
@@ -67,12 +72,27 @@
 </script>
 
 <style scoped>
-    #table{
+    #table,#spanControl{
         margin: 0 auto;
     }
 
+    #reg{
+        display: inline-block;
+        width: 50px;
+        height: 50px;
+        box-shadow: 0 3px 6px rgba(0,0,0,.2), 0 3px 6px rgba(0,0,0,.2);
+        border-radius: 30px 30px;
+        background-size: cover;
+        float: right;
+        margin: 20px 20px 0 0;
+        background-image: url('../assets/kimdamm.png');
+    }
+
+    #reg:hover{
+        cursor: pointer;
+    }
     @media screen and (min-width: 768px){
-        #table{
+        #table,#spanControl{
             width: 752px;
         }
     }
