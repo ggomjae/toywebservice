@@ -17,6 +17,7 @@
     import axios from 'axios';
     import 'vue-good-table/dist/vue-good-table.css'
     import  { VueGoodTable }  from 'vue-good-table';
+    import {router} from "../routes";
 
     export default {
         name: "BoardContent",
@@ -58,8 +59,10 @@
                 })
             },
             onRowClick(params){
-                console.log(params);
-                console.log(params.row.id);
+                router.push("/content?id="+params.row.id)
+                    .catch(err => {
+                        console.log('error :',err)
+                    })
             },
             gotoSave : function () {
                 this.$router.push('/save')
