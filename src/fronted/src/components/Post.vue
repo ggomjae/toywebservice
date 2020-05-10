@@ -40,7 +40,7 @@
                 ).then(response => {
                     console.log(response);
                     alert("등록했습니다.");
-                    window.open("/board","_self");
+                    this.$router.push('/board');
                 }).catch((ex) => {
                     console.warn("ERROR!!!!! : ",ex)
                 })

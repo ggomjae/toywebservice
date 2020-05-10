@@ -11,7 +11,7 @@
         name: "Title",
         methods :{
             gotoEnter : function () {
-                window.open("/enter","_self");
+                this.$router.push('/enter')
             }
         }
     }

@@ -6,6 +6,7 @@
                 :rows="rows"
                 @on-row-click="onRowClick">
         </vue-good-table>
+
         <div id="spanControl">
             <span id = 'reg' v-on:click="gotoSave" />
         </div>
@@ -24,7 +25,6 @@
         },
         data: ()=>{
             return {
-                abd:'abc',
                 columns: [
                     {
                         label: '작성자',
@@ -40,8 +40,8 @@
                         label: '날짜',
                         field: 'modifiedDate',
                         type: 'date',
-                        dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS', // expects 2018-03-16
-                        dateOutputFormat: 'yyyy-MM-dd', // outputs Mar 16th 2018
+                        dateInputFormat: 'yyyy-MM-dd\'T\'HH:mm:ss.SSS',
+                        dateOutputFormat: 'yyyy-MM-dd',
                     }
                 ],
                 rows: []
@@ -62,7 +62,7 @@
                 console.log(params.row.id);
             },
             gotoSave : function () {
-                window.open("/save","_self");
+                this.$router.push('/save')
             }
         },
         mounted() {
@@ -96,4 +96,5 @@
             width: 752px;
         }
     }
+
 </style>

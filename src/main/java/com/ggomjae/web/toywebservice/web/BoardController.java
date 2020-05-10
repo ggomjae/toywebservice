@@ -25,11 +25,13 @@ public class BoardController {
 
     @PutMapping("/api/board/posts/{id}")
     public Long update(@PathVariable Long id, @RequestBody PostsUpdateRequestDto requestDto ){
+
         return postsService.update(id,requestDto);
     }
 
     @GetMapping("/api/board/posts/{id}")
     public PostsResponseDto findById(@PathVariable Long id){
+
         return postsService.findById(id);
     }
 

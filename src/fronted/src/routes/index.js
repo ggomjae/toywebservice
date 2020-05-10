@@ -7,6 +7,7 @@ import Board from '../views/Board.vue'
 import Enter from '../views/Enter.vue'
 import Profile from '../views/Profile.vue'
 import Save from '../views/Save.vue'
+import Content from '../views/Content'
 
 export const router = new VueRouter({
     mode: 'history',
@@ -30,6 +31,11 @@ export const router = new VueRouter({
             path: '/save',
             component: Save,
             name: 'Save'
+        },
+        {
+            path: '/content',
+            component: Content,
+            name: 'Content'
         },
     ]
 })
