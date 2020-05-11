@@ -40,11 +40,20 @@ public class PostsService {
         return id;
     }
 
+    @Transactional
     public PostsResponseDto findById (Long id){
 
         Posts entity = postsRepository.findById(id).orElseThrow(()->
                 new IllegalArgumentException("unUser. id =" +id));
 
         return new PostsResponseDto(entity);
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Posts posts = postsRepository.findById(id).orElseThrow(()->new
+                IllegalArgumentException("not Post. id=" + id));
+
+        postsRepository.delete(posts);
     }
 }

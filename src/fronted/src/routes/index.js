@@ -8,6 +8,7 @@ import Enter from '../views/Enter.vue'
 import Profile from '../views/Profile.vue'
 import Save from '../views/Save.vue'
 import Content from '../views/Content'
+import Update from "../views/Update";
 
 export const router = new VueRouter({
     mode: 'history',
@@ -36,6 +37,11 @@ export const router = new VueRouter({
             path: '/content',
             component: Content,
             name: 'Content'
+        },
+        {
+            path: '/update',
+            component: Update,
+            name: 'Update'
         },
     ]
 })

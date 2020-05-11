@@ -35,6 +35,15 @@ public class BoardController {
         return postsService.findById(id);
     }
 
+    //@DeleteMapping("/api/board/posts/{id}")
+    @RequestMapping(value ="/api/board/posts/{id}", method = RequestMethod.DELETE)
+    public Long delete(@PathVariable Long id){
+
+        postsService.delete(id);
+
+        return id;
+    }
+
     @GetMapping("/api/board/all")
     public List<PostsListResponseDto> findAllPosts(){
 

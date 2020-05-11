@@ -1,6 +1,10 @@
 <template>
     <div>
         <Title></Title>
+        <div class="controlBtn">
+            <span class="Btns" @click="updateBtn">수정</span>
+            <span class="Btns" @click="deleteBtn">삭제</span>
+        </div>
         <div>
             <fieldset>
                 <legend>POST</legend>
@@ -23,6 +27,7 @@
 <script>
     import Title from "../components/Title";
     import axios from "axios";
+    import {router} from "../routes";
 
     export default {
         name: "Content",
@@ -43,6 +48,24 @@
                     }).catch(e => {
                     console.log('error:', e)
                 })
+            },
+            updateBtn(){
+                console.log('updateBtn');
+                router.push("/update?id="+this.$route.query.id)
+                    .catch(err => {
+                        console.log('error :',err)
+                    })
+            },
+            deleteBtn(){
+                  axios.delete('/api/board/posts/'+this.postContent.id)
+                      .then(response => {
+                          console.log('success:',response);
+                          alert('지웠습니다.');
+                          this.$router.push('/board')
+                      }).catch(e => {
+                          console.log('error:', e);
+                          alert(e);
+                  })
             }
         },
         mounted() {
@@ -73,9 +96,22 @@
         margin: 0 auto;
     }
 
+    .controlBtn{
+        margin: 0 auto;
+        height: 40px;
+    }
+
+    .Btns{
+        float: right;
+        margin: 10px 10px 0 0;
+    }
+
     @media screen and (min-width: 600px){
         fieldset{
             width: 600px;
+        }
+        .controlBtn{
+            width: 584px;
         }
     }
 </style>
