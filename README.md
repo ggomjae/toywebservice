@@ -1,6 +1,6 @@
 fan of Celebrity webservice
 ============ 
-vue + springboot
+vue + springboot + jpa 
 - 
 Author 민경재 <br>
 2020.04.04 ~ ING <br>
@@ -9,9 +9,11 @@ Author 민경재 <br>
 >1.vue + springboot 연동<br>
 >2.vue router - /enter , /board<br>
 >3.front ----> server.data return ----->front<br>
->4.profile component add , &router 
->5.vue-good-table , backend : save.update - service,controller,dto  
->6.BoardContent Fronted <-> BackEnd, PC,모바일에 따른 @Media 적용 등 [#24] commit 내용
+>4.profile component add , &router<br>
+>5.vue-good-table , backend : save.update - service,controller,dto<br>  
+>6.BoardContent Fronted <-> BackEnd, PC,모바일에 따른 @Media 적용 등 [#24] commit 내용<br>
+>7.CRUD 기능완료<br>
+>
 ### Screenshots
 >[2020.04.29] :구조 및 1,2,3 스크린샷 <br>
 <div>
@@ -31,4 +33,15 @@ Author 민경재 <br>
 >[2020.05.08] : 6 스크린샷 <br>
 <div>
     <img height="300" src = "https://user-images.githubusercontent.com/43604493/81408988-3b4a0b00-9179-11ea-8987-16c56b2c0f4b.JPG">
+</div>
+
+>[2020.05.11] : 7 스크린샷 <br>
+<div>
+    <img height="300" src = "https://user-images.githubusercontent.com/43604493/81544719-d8dc4f00-93b2-11ea-86e3-ff3bf62f7680.JPG">
+</div>
+<div>
+    <img height="300" src = "https://user-images.githubusercontent.com/43604493/81544723-da0d7c00-93b2-11ea-8a10-a8cfeb20f68e.JPG">
+</div>
+<div>
+    <img height="300" src = "https://user-images.githubusercontent.com/43604493/81544725-daa61280-93b2-11ea-9e90-3037046f4a1d.JPG">
 </div>
