@@ -1,8 +1,11 @@
 fan of Celebrity webservice
-============ 
+==================== 
 vue + springboot + jpa 
-- 
-Author 민경재 <br>
+------------ 
+### Project Description    
+>  '김다미'배우에 대한 팬 운영 사이트. Vue.js, SpringBoot , ORM JPA, Maria DB를 이용. AWS Service를 이용해서 배포 및 운영.  <br>
+>
+>Author 민경재 <br>
 2020.04.04 ~ ING <br>
 * 블로그 링크 <https://blog.naver.com/ggomjae/221890680558> <br>
 ### 개발 상황
