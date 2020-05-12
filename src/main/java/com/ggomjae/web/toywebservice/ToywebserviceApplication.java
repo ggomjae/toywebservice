@@ -11,5 +11,4 @@ public class ToywebserviceApplication {
     public static void main(String[] args) {
         SpringApplication.run(ToywebserviceApplication.class, args);
     }
-
 }
