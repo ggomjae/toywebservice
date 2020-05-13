@@ -26,9 +26,15 @@
         methods :{
             goBoard : function () {
                 this.$router.push('/board')
+                    .catch(err=>{
+                        console.log(err);
+                    })
             },
             goProfile : function () {
                 this.$router.push('/profile')
+                    .catch(err=>{
+                        console.log(err);
+                    })
             }
         }
     }

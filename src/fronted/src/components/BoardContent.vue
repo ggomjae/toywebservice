@@ -66,6 +66,9 @@
             },
             gotoSave : function () {
                 this.$router.push('/save')
+                    .catch(err=>{
+                        console.log(err);
+                    });
             }
         },
         mounted() {

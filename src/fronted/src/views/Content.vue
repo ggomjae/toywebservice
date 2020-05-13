@@ -21,6 +21,16 @@
                 </div>
             </fieldset>
         </div>
+        <div class="controlBtn">
+            <span class="Btns" @click="replyBtn">댓글</span>
+        </div>
+        <div v-for="reply in replyContent" v-bind:key="reply.rno">
+            <fieldset>
+                {{reply.rno}}
+                {{reply.author}}
+                {{reply.content}}
+            </fieldset>
+        </div>
     </div>
 </template>
 
@@ -33,7 +43,8 @@
         name: "Content",
         data(){
             return{
-                postContent : ''
+                postContent : '',
+                replyContent : []
             }
         },
         components : {
@@ -44,6 +55,15 @@
                 axios.get('/api/board/posts/' + this.$route.query.id)
                     .then(response => {
                         this.postContent = response.data;
+                        console.log('success:',response.data);
+                    }).catch(e => {
+                    console.log('error:', e)
+                })
+            },
+            getReply(){
+                axios.get('/api/reply/all/' + this.$route.query.id)
+                    .then(response => {
+                        this.replyContent = response.data;
                         console.log('success:',response.data);
                     }).catch(e => {
                     console.log('error:', e)
@@ -66,10 +86,17 @@
                           console.log('error:', e);
                           alert(e);
                   })
+            },
+            replyBtn(){
+                router.push("/replysave?id="+this.$route.query.id)
+                    .catch(err => {
+                        console.log('error :',err)
+                    })
             }
         },
         mounted() {
             this.getRevisions();
+            this.getReply();
         }
     }
 </script>

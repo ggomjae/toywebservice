@@ -12,6 +12,9 @@
         methods :{
             gotoEnter : function () {
                 this.$router.push('/enter')
+                    .catch(err=>{
+                        console.log(err);
+                    })
             }
         }
     }

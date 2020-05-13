@@ -9,6 +9,7 @@ import Profile from '../views/Profile.vue'
 import Save from '../views/Save.vue'
 import Content from '../views/Content'
 import Update from "../views/Update";
+import ReplySave from "../views/ReplySave";
 
 export const router = new VueRouter({
     mode: 'history',
@@ -42,6 +43,11 @@ export const router = new VueRouter({
             path: '/update',
             component: Update,
             name: 'Update'
+        },
+        {
+            path: '/replysave',
+            component: ReplySave,
+            name: 'ReplySave'
         },
     ]
 })

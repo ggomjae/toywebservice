@@ -4,19 +4,16 @@
         <div class="postBody">
             <div>
                 <fieldset>
-                    <legend>POST</legend>
+                    <legend>REPLY</legend>
                     <div>
                         <div>
-                            <input type="text" v-model="title" />
+                            <input type="text" v-model="author" placeholder="AUTHOR"/>
                         </div>
                         <div>
-                            <input type="text" id="readonlyInput" v-model="author" readonly />
+                            <textarea v-model="content" placeholder="CONTENT.."></textarea>
                         </div>
-                        <div>
-                            <textarea v-model="content" ></textarea>
-                        </div>
-                        <input id ="subBtn" @click="updateData" value=""/>
-                        update
+                        <input id ="subBtn" @click="saveData"/>
+                        save
                     </div>
                 </fieldset>
             </div>
@@ -25,53 +22,37 @@
 </template>
 
 <script>
+
     import Title from "../components/Title";
     import axios from "axios";
 
     export default {
-        name: "Update",
-        components :{
+        name: "ReplySave",
+        components : {
             'Title' : Title
         },
-        data(){
-            return{
-                postContent : '',
-                title : '',
+        data() {
+            return {
+                bno : '',
                 author : '',
                 content : ''
             }
         },
         methods : {
-            getRevisions() {
-                axios.get('/api/board/posts/' + this.$route.query.id)
-                    .then(response => {
-                        this.postContent = response.data;
-                        this.title = this.postContent.title;
-                        this.author = this.postContent.author;
-                        this.content = this.postContent.content;
-                        console.log('success:',response.data);
-                    }).catch(e => {
-                    console.log('error:', e)
-                })
-            },
-            updateData : function () {
-                axios.put('/api/board/posts/'+this.postContent.id,
-                    { title:this.title, author:this.author, content:this.content }
+            saveData : function () {
+                axios.post('/api/reply/save',
+                    { bno:this.$route.query.id, author:this.author, content:this.content }
                 ).then(response => {
-                        console.log('success:',response);
-                        alert('수정하였습니다.');
-                    this.$router.push('/content?id='+this.$route.query.id)
+                    console.log(response);
+                    alert("등록했습니다.");
+                    this.$router.push('/content?id=' + this.$route.query.id)
                         .catch(err=>{
                             console.log(err);
-                        })
-                }).catch(e => {
-                    console.log('error:', e);
-                    alert(e);
+                        });
+                }).catch((ex) => {
+                    console.warn("ERROR!!!!! : ",ex)
                 })
             }
-        },
-        mounted() {
-            this.getRevisions();
         }
     }
 </script>
@@ -131,9 +112,6 @@
         width: 280px;
     }
 
-    #readonlyInput{
-        background: #e3d2d2;
-    }
     @media screen and (min-width: 600px){
         fieldset{
             width: 600px;
