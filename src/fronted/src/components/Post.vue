@@ -13,7 +13,7 @@
                     <div>
                         <textarea v-model="content" placeholder="CONTENT.."></textarea>
                     </div>
-                    <input id ="subBtn" @click="saveData" value=""/>
+                    <input id ="subBtn" @click="saveData"/>
                     save
                 </div>
             </fieldset>
