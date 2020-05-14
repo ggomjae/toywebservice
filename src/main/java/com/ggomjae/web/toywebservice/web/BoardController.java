@@ -1,6 +1,7 @@
 package com.ggomjae.web.toywebservice.web;
 
 import com.ggomjae.web.toywebservice.service.PostsService;
+import com.ggomjae.web.toywebservice.service.ReplysService;
 import com.ggomjae.web.toywebservice.web.dto.*;
 
 import lombok.RequiredArgsConstructor;
@@ -14,6 +15,7 @@ import java.util.List;
 public class BoardController {
 
     private final PostsService postsService;
+    private final ReplysService replysService;
 
     @PostMapping("/api/board/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
@@ -38,6 +40,7 @@ public class BoardController {
     public Long delete(@PathVariable Long id){
 
         postsService.delete(id);
+        replysService.deleteAll(id);
 
         return id;
     }

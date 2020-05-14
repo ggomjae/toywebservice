@@ -1,5 +1,7 @@
 package com.ggomjae.web.toywebservice.service;
 
+import com.ggomjae.web.toywebservice.domain.posts.Posts;
+import com.ggomjae.web.toywebservice.domain.replys.Replys;
 import com.ggomjae.web.toywebservice.domain.replys.ReplysRepository;
 import com.ggomjae.web.toywebservice.web.dto.PostsListResponseDto;
 import com.ggomjae.web.toywebservice.web.dto.PostsSaveRequestDto;
@@ -30,5 +32,19 @@ public class ReplysService {
     public Long save(ReplysSaveRequestDto replysSaveRequestDto){
 
         return replysRepository.save(replysSaveRequestDto.toEntity()).getRno();
+    }
+
+    @Transactional
+    public void delete(Long id){
+        Replys replys = replysRepository.findById(id).orElseThrow(()->new
+                IllegalArgumentException("not Replys. id=" + id));
+
+        replysRepository.delete(replys);
+    }
+
+    @Transactional
+    public void deleteAll(Long id){
+
+        replysRepository.deleteReplys(id);
     }
 }

@@ -23,6 +23,14 @@ public class ReplyController {
         return replysService.save(replysSaveRequestDto);
     }
 
+    @RequestMapping(value ="/api/reply/delete/{id}", method = RequestMethod.DELETE)
+    public Long delete(@PathVariable Long id){
+
+        replysService.delete(id);
+
+        return id;
+    }
+
     @GetMapping("/api/reply/all/{bno}")
     public List<ReplysListResponseDto> findAllReplys(@PathVariable("bno") Long bno){
 

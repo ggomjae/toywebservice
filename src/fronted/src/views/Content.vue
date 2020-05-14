@@ -29,6 +29,9 @@
                 {{reply.rno}}
                 {{reply.author}}
                 {{reply.content}}
+                <span class="Btns" @click="replyDeleteBtn(reply.rno)">
+                    삭제
+                </span>
             </fieldset>
         </div>
     </div>
@@ -81,18 +84,32 @@
                       .then(response => {
                           console.log('success:',response);
                           alert('지웠습니다.');
-                          this.$router.push('/board')
+                          this.$router.push('/board');
                       }).catch(e => {
                           console.log('error:', e);
                           alert(e);
                   })
+            },
+            replyDeleteBtn(param){
+                axios.delete('/api/reply/delete/'+param)
+                    .then(response => {
+                        console.log('success:',response);
+                        alert('지웠습니다.');
+                        router.replace('/board')
+                            .catch(e => {
+                                console.log('error:',e);
+                            })
+                    }).catch(e => {
+                    console.log('error:', e);
+                    alert(e);
+                })
             },
             replyBtn(){
                 router.push("/replysave?id="+this.$route.query.id)
                     .catch(err => {
                         console.log('error :',err)
                     })
-            }
+            },
         },
         mounted() {
             this.getRevisions();
