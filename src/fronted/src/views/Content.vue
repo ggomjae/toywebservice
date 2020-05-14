@@ -28,7 +28,7 @@
             <div id ="replyField">
                 <div id="replyinformation">
                     <span id="replyauthor">{{reply.author}}</span>
-                    <span id="replydate">{{moment(reply.modifiedDate).format('YYYY.MM.DD-HH:mm')}}</span>
+                    <span id="replydate">{{moment(reply.modifiedDate).format(' YYYY.MM.DD HH:mm')}}</span>
                     <span id="replydeleteBtn" @click="replyDeleteBtn(reply.rno)">
                         삭제
                     </span>
