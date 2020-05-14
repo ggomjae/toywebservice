@@ -5,6 +5,9 @@ import com.ggomjae.web.toywebservice.service.ReplysService;
 import com.ggomjae.web.toywebservice.web.dto.*;
 
 import lombok.RequiredArgsConstructor;
+import org.slf4j.ILoggerFactory;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -16,6 +19,8 @@ public class BoardController {
 
     private final PostsService postsService;
     private final ReplysService replysService;
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @PostMapping("/api/board/posts")
     public Long save(@RequestBody PostsSaveRequestDto requestDto){
@@ -47,7 +52,7 @@ public class BoardController {
 
     @GetMapping("/api/board/all")
     public List<PostsListResponseDto> findAllPosts(){
-
+        logger.info("ggomjae");
         List<PostsListResponseDto> postAll = postsService.findAllDesc();
 
         return postAll;

@@ -2,12 +2,12 @@
     <div>
         <Title></Title>
         <div class="controlBtn">
-            <span class="Btns" @click="updateBtn">수정</span>
-            <span class="Btns" @click="deleteBtn">삭제</span>
+            <span class="boardBtns" @click="updateBtn">수정</span>
+            <span class="boardBtns" @click="deleteBtn">삭제</span>
         </div>
         <div>
-            <fieldset>
-                <legend>POST</legend>
+            <fieldset id="postCss">
+                <legend id="postLegend">POST</legend>
                 <div>
                     <div>
                         {{postContent.title}}
@@ -25,14 +25,18 @@
             <span class="Btns" @click="replyBtn">댓글</span>
         </div>
         <div v-for="reply in replyContent" v-bind:key="reply.rno">
-            <fieldset>
-                {{reply.rno}}
-                {{reply.author}}
-                {{reply.content}}
-                <span class="Btns" @click="replyDeleteBtn(reply.rno)">
-                    삭제
-                </span>
-            </fieldset>
+            <div id ="replyField">
+                <div id="replyinformation">
+                    <span id="replyauthor">{{reply.author}}</span>
+                    <span id="replydate">{{moment(reply.modifiedDate).format('YYYY.MM.DD-HH:mm')}}</span>
+                    <span id="replydeleteBtn" @click="replyDeleteBtn(reply.rno)">
+                        삭제
+                    </span>
+                </div>
+                <div id="replyContent">
+                    {{reply.content}}
+                </div>
+            </div>
         </div>
     </div>
 </template>
@@ -120,7 +124,7 @@
 
 <style scoped>
 
-    legend {
+    #postLegend {
         color:#2F3B52;
         font-size:16px;
         background:#fff;
@@ -131,7 +135,7 @@
         font-weight:bold;
     }
 
-    fieldset {
+    #postCss {
         font-family:Helvetica, sans-serif;
         border-radius:10px;
         background: #F6F6F8;
@@ -143,15 +147,64 @@
     .controlBtn{
         margin: 0 auto;
         height: 40px;
+        cursor: pointer;
     }
 
     .Btns{
         float: right;
-        margin: 10px 10px 0 0;
+        color:#2F3B52;
+        font-size:16px;
+        background:#fff;
+        -moz-border-radius:4px;
+        box-shadow: 0 1px 5px gray;
+        padding:5px 10px;
+        font-family:Helvetica, sans-serif;
+        font-weight:bold;
+        border-radius:10px;
+        margin: 0 5px 0 0;
+        cursor: pointer;
+    }
+
+    .boardBtns{
+        float: right;
+        font-size:16px;
+        padding:5px 10px;
+        font-family:Helvetica, sans-serif;
+        margin: 0 5px 0 0;
+        cursor: pointer;
+    }
+
+    #replydeleteBtn{
+        float: right;
+        color:#2F3B52;
+        font-size: 12px;
+        cursor: pointer;
+    }
+
+    #replyField{
+        border-bottom: 1px solid lightslategray;
+        margin: 0 auto;
+    }
+
+    #replyinformation{
+        text-align: left;
+    }
+
+    #replyContent{
+        text-align: left;
+    }
+
+    #replyauthor,#replydate{
+        font-size: 12px;
+        color: #7f7f7f;
+    }
+
+    #replyauthor{
+        font-weight: bold;
     }
 
     @media screen and (min-width: 600px){
-        fieldset{
+        fieldset,#replyField{
             width: 600px;
         }
         .controlBtn{

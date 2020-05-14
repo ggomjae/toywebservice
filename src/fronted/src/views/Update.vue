@@ -15,7 +15,7 @@
                         <div>
                             <textarea v-model="content" ></textarea>
                         </div>
-                        <input id ="subBtn" @click="updateData" value=""/>
+                        <span id ="subBtn" @click="updateData" value=""/>
                         update
                     </div>
                 </fieldset>
