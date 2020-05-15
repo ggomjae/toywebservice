@@ -1,6 +1,7 @@
 <template>
   <div id = "app">
     <router-view></router-view>
+    <div class="temp"></div>
     <Foot></Foot>
   </div>
 </template>
@@ -33,6 +34,11 @@
   #app{
     position: relative;
   }
+
+  .temp{
+    height: 50px;
+  }
+
   .shadow{
     box-shadow: 5px 10px 10px rgba(0,0,0,0.03);
   }

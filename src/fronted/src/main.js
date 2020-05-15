@@ -1,6 +1,6 @@
 import Vue from 'vue'
 import App from './App.vue'
-import { router } from './routes/index.js'
+import { router } from './routes'
 import moment from 'moment'
 
 Vue.prototype.moment = moment

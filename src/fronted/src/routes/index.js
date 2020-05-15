@@ -1,52 +1,44 @@
-import Vue from 'vue'
-import VueRouter from 'vue-router'
+import Vue from 'vue';
+import VueRouter from 'vue-router';
 
-Vue.use(VueRouter)
-
-import Board from '../views/Board.vue'
-import Enter from '../views/Enter.vue'
-import Profile from '../views/Profile.vue'
-import Save from '../views/Save.vue'
-import Content from '../views/Content'
-import Update from "../views/Update";
-import ReplySave from "../views/ReplySave";
+Vue.use(VueRouter);
 
 export const router = new VueRouter({
     mode: 'history',
     routes: [
         {
             path: '/enter',
-            component: Enter,
+            component: ()=> import('../views/Enter.vue'),
             name: 'Enter'
         },
         {
             path: '/board',
-            component: Board,
+            component: ()=> import('../views/Board.vue'),
             name: 'Board'
         },
         {
             path: '/profile',
-            component: Profile,
+            component: ()=> import('../views/Profile.vue'),
             name: 'Profile'
         },
         {
             path: '/save',
-            component: Save,
+            component: ()=> import('../views/Save.vue'),
             name: 'Save'
         },
         {
             path: '/content',
-            component: Content,
+            component: ()=> import('../views/Content.vue'),
             name: 'Content'
         },
         {
             path: '/update',
-            component: Update,
+            component: ()=> import('../views/Update.vue'),
             name: 'Update'
         },
         {
             path: '/replysave',
-            component: ReplySave,
+            component: ()=> import('../views/ReplySave.vue'),
             name: 'ReplySave'
         },
     ]

@@ -7,10 +7,14 @@
                     <legend>REPLY</legend>
                     <div>
                         <div>
-                            <input type="text" v-model="author" placeholder="AUTHOR"/>
+                            <label>
+                                <input type="text" v-model="author" placeholder="AUTHOR"/>
+                            </label>
                         </div>
                         <div>
-                            <textarea v-model="content" placeholder="CONTENT.."></textarea>
+                            <label>
+                                <textarea v-model="content" placeholder="CONTENT.."></textarea>
+                            </label>
                         </div>
                         <span id ="subBtn" @click="saveData"/>
                         save

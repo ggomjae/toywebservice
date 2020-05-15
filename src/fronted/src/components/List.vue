@@ -1,4 +1,5 @@
 <template>
+    <div>
    <section class="listContainer">
        <ul>
            <li> Profile
@@ -18,6 +19,7 @@
            </li>
        </ul>
    </section>
+    </div>
 </template>
 
 <script>
@@ -51,7 +53,7 @@
 
     ul{
         list-style-type: none;
-        padding-left: 0px;
+        padding-left: 0;
         margin-top: 0;
         text-align: left;
     }
@@ -67,7 +69,6 @@
         background: white;
         border-radius: 5px;
         box-shadow: 0.5px 1px 0px 0px rgba(0,0,0,.2);
-
     }
 
     #goProfileBtn{
