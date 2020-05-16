@@ -4,10 +4,10 @@ cloud:
     credentials:
       accessKey: YOUR_ACCESS_KEY
       secretKey: YOUR_SECRET_KEY
-    s3:
-      bucket: YOUR_BUCKET_NAME
-    region:
-      static: YOUR_REGION
-    stack:
-      auto: false
+#    s3:
+#      bucket: YOUR_BUCKET_NAME
+#    region:
+#      static: YOUR_REGION
+#    stack:
+#      auto: false
 
