@@ -4,8 +4,7 @@ build/
 !gradle/wrapper/gradle-wrapper.jar
 
 !**/src/test/**
-**/*.yml
-**/src/main/resources/aws.yml
+**/aws.yml
 ### STS ###
 .apt_generated
 .classpath
