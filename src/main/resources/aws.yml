@@ -6,7 +6,8 @@ cloud:
       secretKey: YOUR_SECRET_KEY
     s3:
       bucket: YOUR_BUCKET_NAME
-    region:
-      static: YOUR_REGION
-    stack:
-      auto: false
+#    region:
+#      static: YOUR_REGION
+#    stack:
+#      auto: false
+
