@@ -23,13 +23,15 @@
                  </li>
             </ul>
         </div>
-        <button>
-            upload
-        </button>
+            <input type="file" ref="file" v-on:change="handleFileUpload()">
+            <button  v-on:click="fileSubmit()">
+                Submit
+            </button>
     </div>
 </template>
 
 <script>
+    import axios from "axios";
 
     export default {
         name: "ProfileContent",
@@ -41,7 +43,32 @@
                     birthday: "1995.4.9",
                     tall: "170cm",
                     Education: "인천대학교"
-                }
+                },
+                file : ''
+            }
+        },
+        methods : {
+            fileSubmit(){
+                let formData = new FormData();
+                formData.append('file',this.file);
+
+                axios.post('/api/fileupload',formData,{
+                    headers: {
+                        'Content-Type': 'multipart/form-data'
+                    }
+                }).then( response =>{
+                        this.reset();
+                        console.log(response);
+                }).catch( err => {
+                        console.log(err);
+                    });
+            },
+            handleFileUpload() {
+                this.file = this.$refs.file.files[0];
+            },
+            reset() {
+                const input = this.$refs.file;
+                input.type = 'file';
             }
         }
     }
