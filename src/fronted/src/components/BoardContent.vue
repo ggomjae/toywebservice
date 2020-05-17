@@ -48,6 +48,7 @@
                 rows: []
             }
         },
+        //
         methods : {
             getRevisions() {
                 axios.get('/api/board/all')
