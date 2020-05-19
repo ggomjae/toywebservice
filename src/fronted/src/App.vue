@@ -1,6 +1,8 @@
 <template>
   <div id = "app">
-    <router-view></router-view>
+    <keep-alive  include="Profile">
+      <router-view></router-view>
+    </keep-alive>
     <div class="temp"></div>
     <Foot></Foot>
   </div>

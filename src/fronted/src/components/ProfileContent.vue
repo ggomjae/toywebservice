@@ -1,7 +1,7 @@
 <template>
     <div id="aaa">
         <span id ="damiImage">
-            사진
+            <img v-bind:src="imgData" alt="imgData">
         </span>
         <div class="profileContainer">
             <ul>
@@ -44,7 +44,10 @@
                     tall: "170cm",
                     Education: "인천대학교"
                 },
-                file : ''
+                file : '',
+                //imgData : require('../assets/kimdami.png')
+                imgData : ''
+                //만약 url을 갖고온다면  그냥 '' 에넣으면 된다
             }
         },
         methods : {
@@ -58,6 +61,7 @@
                     }
                 }).then( response =>{
                         this.reset();
+                        this.imgData = response.data;
                         console.log(response);
                 }).catch( err => {
                         console.log(err);
@@ -76,10 +80,10 @@
 
 <style scoped>
 
-    #damiImage{
+    #damiImage,img{
         display: inline-block;
-        width: 200px;
-        height: 200px;
+        width: 250px;
+        height: 250px;
         border: 1px solid purple;
     }
     .profileContainer{
