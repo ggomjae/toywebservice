@@ -68,6 +68,17 @@
                     });
             },
             handleFileUpload() {
+
+                if(this.imgData !== '') {
+                    axios.post('/api/removeFile', { imgPath: this.imgData
+                        })
+                        .then(response => {
+                            console.log(response.data);
+                        }).catch(e => {
+                        console.log('error:', e)
+                    });
+                }
+
                 this.file = this.$refs.file.files[0];
             },
             reset() {

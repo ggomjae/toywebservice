@@ -8,6 +8,8 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 import lombok.NoArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -18,6 +20,7 @@ import java.io.IOException;
 @Service
 @NoArgsConstructor
 public class S3Service {
+    Logger logger = LoggerFactory.getLogger(this.getClass());
     private AmazonS3 s3Client;
 
     @Value("${cloud.aws.credentials.accessKey}")
@@ -44,9 +47,23 @@ public class S3Service {
 
     public String upload(MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
-
+        logger.info(fileName);
+        logger.info(fileName);
+        logger.info(fileName);
         s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
         return s3Client.getUrl(bucket, fileName).toString();
+    }
+
+    public boolean delete(String currentFilePath){
+
+        boolean isExistObject = s3Client.doesObjectExist(bucket, currentFilePath);
+
+        if (isExistObject) {
+            s3Client.deleteObject(bucket, currentFilePath);
+            return true;
+        }else{
+            return false;
+        }
     }
 }
