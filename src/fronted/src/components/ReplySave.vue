@@ -1,40 +1,30 @@
 <template>
     <div>
-        <Title></Title>
-        <div class="postBody">
+        <fieldset>
+            <legend>REPLY</legend>
             <div>
-                <fieldset>
-                    <legend>REPLY</legend>
-                    <div>
-                        <div>
-                            <label>
-                                <input type="text" v-model="author" placeholder="AUTHOR"/>
-                            </label>
-                        </div>
-                        <div>
-                            <label>
-                                <textarea v-model="content" placeholder="CONTENT.."></textarea>
-                            </label>
-                        </div>
-                        <span id ="subBtn" @click="saveData"/>
-                        save
-                    </div>
-                </fieldset>
+                <div>
+                    <label>
+                        <input type="text" v-model="author" placeholder="AUTHOR"/>
+                    </label>
+                </div>
+                <div>
+                    <label>
+                        <textarea v-model="content" placeholder="CONTENT.."></textarea>
+                    </label>
+                </div>
+                <span id ="subBtn" @click="saveData"/>
+                save
             </div>
-        </div>
+        </fieldset>
     </div>
 </template>
 
 <script>
-
-    import Title from "../components/Title";
     import axios from "axios";
 
     export default {
         name: "ReplySave",
-        components : {
-            'Title' : Title
-        },
         data() {
             return {
                 bno : '',

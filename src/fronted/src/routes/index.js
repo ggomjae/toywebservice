@@ -37,9 +37,9 @@ export const router = new VueRouter({
             name: 'Update'
         },
         {
-            path: '/replysave',
-            component: ()=> import('../views/ReplySave.vue'),
-            name: 'ReplySave'
+            path: '/reply',
+            component: ()=> import('../views/Reply.vue'),
+            name: 'Reply'
         },
     ]
 })

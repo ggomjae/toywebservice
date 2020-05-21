@@ -1,18 +1,19 @@
 <template>
     <div>
         <Title></Title>
-        <PostUpdate></PostUpdate>
+        <ReplySave></ReplySave>
     </div>
 </template>
 
 <script>
+
     import Title from "../components/Title";
-    import PostUpdate from "../components/PostUpdate";
+    import ReplySave from "../components/ReplySave";
 
     export default {
-        name: "Update",
-        components :{
-            'PostUpdate':PostUpdate,
+        name: "Reply",
+        components : {
+            'ReplySave' : ReplySave,
             'Title' : Title
         }
     }
