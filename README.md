@@ -27,9 +27,9 @@ vue + springboot + jpa
 ### Screenshots 과 세부 내용
 <br>
 
->**[2020.04.29] :구조 및 1,2,3 스크린샷** <br>
+>**[2020.04.29] :구조 및 1,2,3 스크린샷 [ 계속 update ]** <br>
 <div>
-    <img width ="300" src = "https://user-images.githubusercontent.com/43604493/80437213-feda0c00-893b-11ea-8085-17004f8fd2e8.JPG">
+    <img width ="300" src = "https://user-images.githubusercontent.com/43604493/82628329-81967400-9c27-11ea-9222-317c788b6b1f.JPG">
     <img width ="300" src = "https://user-images.githubusercontent.com/43604493/80437214-ff72a280-893b-11ea-96f0-9a2a3dbce99b.JPG">
 </div>
 <br>
