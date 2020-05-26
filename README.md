@@ -104,7 +104,7 @@ data: ()=>{
 ```Controller,Service,JPA```를 이용한 데이터 긁기<br>
 각 구현 일부분
 ```bash
-
+[Controller]
 @GetMapping("/api/board/all")
 public List<PostsListResponseDto> findAllPosts(){
      logger.info("ggomjae");
@@ -113,6 +113,7 @@ public List<PostsListResponseDto> findAllPosts(){
      return postAll;
 }
 
+[Service]
 @Transactional(readOnly = true)
 public List<PostsListResponseDto> findAllDesc(){
 
@@ -121,6 +122,7 @@ public List<PostsListResponseDto> findAllDesc(){
              .collect(Collectors.toList());
 }
 
+[Repository]
 public interface ReplysRepository extends JpaRepository<Replys, Long> {
 
     @Query("SELECT r FROM Replys r WHERE r.bno = ?1 AND r.rno > 0 ORDER BY r.rno ASC")
