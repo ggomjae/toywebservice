@@ -89,7 +89,7 @@
         padding-left: 115px;
     }
 
-    #goOptionBtn:hover, #goBoardBtn:hover, #goProfileBtn:hover{
+    #goEmailBtn:hover, #goBoardBtn:hover, #goProfileBtn:hover{
         cursor: pointer;
     }
 
