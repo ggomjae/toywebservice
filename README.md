@@ -3,8 +3,10 @@ Fan of Celebrity webservice
 vue + springboot + jpa 
 ------------ 
 ### Project Description    
->  '김다미'배우에 대한 팬 운영 사이트. Vue.js, SpringBoot , ORM JPA, Maria DB를 이용.<br> 
->AWS S3를 이용한 Profile file upload, AWS EC2를 이용해서 배포 및 운영.  <br>
+> '김다미'배우에 대한 팬 운영 사이트. Vue.js, SpringBoot , ORM JPA, Maria DB를 이용.<br> 
+> 배우 스케쥴을 관리자가 올려주고 사용자가 댓글을 다는 CRUD 게시판 구현 <br>
+> AWS S3를 이용한 Profile file upload, AWS EC2를 이용해서 배포 및 운영.  <br>
+> 관리자에게 건의할 수 있는 옵션 추가 ( + gmail)
 > 모바일 웹으로 개발된 애플리케이션이 특징<br>
 
 >Author 민경재[GGOMJAE] <br>
@@ -23,7 +25,7 @@ vue + springboot + jpa
 >10.AWS s3를 이용하여 Profile upload - 만약 file을 올리면 기존에 있던 파일 s3 object 삭제 <br>
 >
 >11.keep-alive를 이용한 component data 유지 -> 나중에 vuex를 이용하여 수정 예정<br>
-
+>12.Gmail SMTP, MailSender을 이용하여 관리자에게 Gmail 보내기<br>
 ### Screenshots 과 세부 내용
 <br>
 
@@ -41,7 +43,7 @@ vue + springboot + jpa
 devServer : {
         proxy : {
             '/api' : {
-                target : 'http://localhost:9000',
+                target : 'http://localhost:9001',
                 ws : true,
                 changeOrigin: true
             },
@@ -305,4 +307,62 @@ s3Client.deleteObject(bucket, currentFilePath);
     <img height="300" src = "https://user-images.githubusercontent.com/43604493/82350376-3b2df300-9a36-11ea-99f1-0cc99b983638.JPG">
 </div>
 
+<br>
+
+> **[2020.05.28] : 12 Gmail SMTP, MailSender을 이용하여 관리자에게 Gmail 보내기**<br>
+<div>
+    <img height="300" src = "https://user-images.githubusercontent.com/43604493/83134563-82477280-a11f-11ea-87ca-bffc298856eb.JPG">
+</div>
+
+<br>
+
+```bash
+[application.yml]
+spring:
+  mail:
+    host: smtp.gmail.com
+    port: 587
+    username: ik ~
+    password:
+    properties:
+      mail:
+        smtp:
+          auth: true
+          starttls:
+            enable: true
+
+[EmailContent.vue]
+axios.post('/api/mail',
+    { title:this.title, address:this.address, content:this.content })
+
+[MailController]
+@PostMapping("/api/mail")
+public void execMail(@RequestBody MailDto mailDto) {
+        mailService.mailSend(mailDto);
+}
+
+[mailService]
+public class MailService {
+    private JavaMailSender mailSender;
+    private static final String FROM_ADDRESS = "ik ~ @gmail.com";
+
+    public void mailSend(MailDto mailDto) {
+        SimpleMailMessage message = new SimpleMailMessage();
+        message.setTo(mailDto.getAddress());
+        message.setFrom(MailService.FROM_ADDRESS);
+        message.setSubject(mailDto.getTitle());
+        message.setText(mailDto.getContent());
+
+        mailSender.send(message);
+    }
+}
+```
+* ```google Oauth2```를 이용한 로그인을 할 예정이므로 ```Gmail SMTP Server```를 이용한 메일보내기 구현
+    * 보내는데 5초 정도 걸림
+
+<br>
+
 ### 끝맺음
+<br>
+
+> 개발 과정을 블로그에 올리면서 개발하고 있습니다. 링크 <https://blog.naver.com/ggomjae> <br>
