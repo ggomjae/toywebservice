@@ -41,5 +41,10 @@ export const router = new VueRouter({
             component: ()=> import('../views/Reply.vue'),
             name: 'Reply'
         },
+        {
+            path: '/email',
+            component: ()=> import('../views/Email.vue'),
+            name: 'Email'
+        },
     ]
 })

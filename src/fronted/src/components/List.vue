@@ -13,7 +13,7 @@
                </span>
            </li>
            <li> Options
-               <span id="goOptionBtn">
+               <span v-on:click="goEmail" id="goEmailBtn">
                    <i class="checkBtn fas fa-check" aria-hidden="true"></i>
                </span>
            </li>
@@ -34,6 +34,12 @@
             },
             goProfile : function () {
                 this.$router.push('/profile')
+                    .catch(err=>{
+                        console.log(err);
+                    })
+            },
+            goEmail : function () {
+                this.$router.push('/email')
                     .catch(err=>{
                         console.log(err);
                     })
@@ -79,7 +85,7 @@
         padding-left: 130px;
     }
 
-    #goOptionBtn{
+    #goEmailBtn{
         padding-left: 115px;
     }
 
