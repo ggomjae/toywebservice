@@ -4,10 +4,10 @@ vue + springboot + jpa
 ------------ 
 ### Project Description    
 > '김다미'배우에 대한 팬 운영 사이트. Vue.js, SpringBoot , ORM JPA, Maria DB를 이용.<br> 
-> 배우 스케쥴을 관리자가 올려주고 사용자가 댓글을 다는 CRUD 게시판 구현 <br>
+> 배우 스케쥴을 관리자가 올려주고 사용자가 댓글을 다는 CRUD 게시판 구현. <br>
 > AWS S3를 이용한 Profile file upload, AWS EC2를 이용해서 배포 및 운영.  <br>
-> 관리자에게 건의할 수 있는 옵션 추가 ( + gmail)
-> 모바일 웹으로 개발된 애플리케이션이 특징<br>
+> 관리자에게 건의할 수 있는 옵션 추가 ( + gmail ) <br>
+> 모바일 웹으로 개발된 애플리케이션이 특징.<br>
 
 >Author 민경재[GGOMJAE] <br>
 2020.04.04 ~ ING <br>

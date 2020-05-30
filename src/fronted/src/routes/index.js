@@ -46,5 +46,10 @@ export const router = new VueRouter({
             component: ()=> import('../views/Email.vue'),
             name: 'Email'
         },
+        {
+            path: '/',
+            component: ()=> import('../views/Login.vue'),
+            name: 'Login'
+        }
     ]
 })
