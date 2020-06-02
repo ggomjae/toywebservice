@@ -6,8 +6,9 @@ vue + springboot + jpa
 > '김다미'배우에 대한 팬 운영 사이트. Vue.js, SpringBoot , ORM JPA, Maria DB를 이용.<br> 
 > 배우 스케쥴을 관리자가 올려주고 사용자가 댓글을 다는 CRUD 게시판 구현. <br>
 > AWS S3를 이용한 Profile file upload, AWS EC2를 이용해서 배포 및 운영.  <br>
-> 관리자에게 건의할 수 있는 옵션 추가 ( + gmail ) <br>
+> 관리자에게 건의할 수 있는 옵션 추가. ( + gmail ) <br>
 > 모바일 웹으로 개발된 애플리케이션이 특징.<br>
+> 앞단 Vue, 뒷단 Springboot REST API SERVER. <br>
 
 >Author 민경재[GGOMJAE] <br>
 2020.04.04 ~ ING <br>
@@ -26,6 +27,8 @@ vue + springboot + jpa
 >
 >11.keep-alive를 이용한 component data 유지 -> 나중에 vuex를 이용하여 수정 예정<br>
 >12.Gmail SMTP, MailSender을 이용하여 관리자에게 Gmail 보내기<br>
+>13.Spring Security JWT를 이용한 로그인 구현. 현재 : 로그인 후 JWT 생성 -> 반환 [ 진행 중 ] <br>
+
 ### Screenshots 과 세부 내용
 <br>
 
@@ -357,12 +360,183 @@ public class MailService {
     }
 }
 ```
-* ```google Oauth2```를 이용한 로그인을 할 예정이므로 ```Gmail SMTP Server```를 이용한 메일보내기 구현
+* ```Gmail SMTP Server```를 이용한 메일보내기 구현
     * 보내는데 5초 정도 걸림
 
 <br>
 
+> **[2020.06.02] : 13 Spring Security JWT를 이용한 로그인 구현. 현재 : 로그인 후 JWT 생성 -> 반환**<br>
+<div>
+    <img height="300" src = "https://user-images.githubusercontent.com/43604493/83534486-d9888100-a52b-11ea-9e4a-ecb00a729ce6.JPG">
+</div>
+
+<br>
+
+[Fronted]
+```bash
+[JoinContent.vue]
+joinSubmit() {
+      axios.post('/api/join',
+           { email:this.email, password:this.password})
+                ...
+
+[LoginContent.vue]
+onSubmit(email, password) {
+      this.$store.dispatch('LOGIN', {email, password})
+                ...
+
+[/store/index.js - vuex]
+mutations: {
+        LOGIN (state, {accessToken}) {
+            state.accessToken = accessToken;
+        },
+        LOGOUT (state) {
+            state.accessToken = null
+        }
+    },
+    actions: {
+        LOGIN ({commit}, {email, password}) {
+            return axios.post(`/api/login`, {email, password})
+                .then(({data}) => {
+                        alert(data);
+                        commit('LOGIN', data);
+                    }
+                )
+        },
+        LOGOUT ({commit}) {
+            commit('LOGOUT')
+        },
+    }
+```
+* ```Vuex```를 이용한 JWT 보관 + 새로고침으로 인한 없어짐으로 LocalStorage로 구현 [아직 구현 중]
+    * ```mutations + actions```를 이용한 Vuex 저장
+
+<br>
+
+[BackEnd]
+```bash
+[UserController]
+@PostMapping("/api/join")
+public Long join(@RequestBody Map<String, String> user) {
+     return userRepository.save(User.builder()
+             ...
+             .build()).getUserid();
+}
+
+@PostMapping("/api/login")
+public String login(@RequestBody Map<String, String> user) {
+     ...
+     return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
+}
+
+[WebSecurityConfig]
+RequiredArgsConstructor
+@EnableWebSecurity
+public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
+
+    private final JwtTokenProvider jwtTokenProvider;
+
+    @Bean
+    public PasswordEncoder passwordEncoder() {
+        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
+    }
+
+    @Bean
+    @Override
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
+    }
+
+    @Override
+    protected void configure(HttpSecurity http) throws Exception {
+        http
+                .httpBasic().disable()
+        ...
+}
+
+[JwtTokenProvider]
+@RequiredArgsConstructor
+@Component
+public class JwtTokenProvider {
+
+    ...
+
+    @PostConstruct
+    protected void init() {
+        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
+    }
+
+    public String createToken(String userPk, List<String> roles) {
+        ... createToken
+    }
+
+    public Authentication getAuthentication(String token) {
+        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
+        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
+    }
+
+    public String getUserPk(String token) {
+        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
+    }
+
+    public String resolveToken(HttpServletRequest request) {
+        return request.getHeader("X-AUTH-TOKEN");
+    }
+
+    public boolean validateToken(String jwtToken) {
+       ...
+    }
+}
+
+[JwtAuthenticationFilter]
+@RequiredArgsConstructor
+public class JwtAuthenticationFilter extends GenericFilterBean {
+
+    ...
+
+    @Override
+    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
+
+        String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
+
+        ... 예외        
+
+        chain.doFilter(request, response);
+    }
+
+[User]
+@Entity
+public class User implements UserDetails {
+      ... 생략 : UserDetails 상속받는게 중요
+}
+
+[CustomUserDetailService]
+@RequiredArgsConstructor
+@Service
+public class CustomUserDetailService implements UserDetailsService {
+
+    private final UserRepository userRepository;
+
+    @Override
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+        return userRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
+    }
+
+}
+```
+* ```Spring Security + JWT```를 이용한 로그인 구현 
+    * ```http webconfig```를 이용한 접근에 따른 권한 구현 REST API [아직 구현 중]
+
+<br>
+
+### 다음 개발 단계  + README 
+<br>
+
+> REST API 권한에 따른 구현 
+
 ### 끝맺음
 <br>
 
+> README는 간단한 흐름만 파악하도록 코드를 넣었습니다. 완전한 코드는 Git 위의 코드 부분을 봐주세요. <br>
 > 개발 과정을 블로그에 올리면서 개발하고 있습니다. 링크 <https://blog.naver.com/ggomjae> <br>
