@@ -20,7 +20,7 @@ public class UserController {
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
 
-    @PostMapping("/join")
+    @PostMapping("/api/join")
     public Long join(@RequestBody Map<String, String> user) {
         return userRepository.save(User.builder()
                 .email(user.get("email"))
@@ -29,7 +29,7 @@ public class UserController {
                 .build()).getUserid();
     }
 
-    @PostMapping("/login")
+    @PostMapping("/api/login")
     public String login(@RequestBody Map<String, String> user) {
         User member = userRepository.findByEmail(user.get("email"))
                 .orElseThrow(() -> new IllegalArgumentException("가입되지 않은 E-MAIL 입니다."));

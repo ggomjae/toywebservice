@@ -50,6 +50,11 @@ export const router = new VueRouter({
             path: '/',
             component: ()=> import('../views/Login.vue'),
             name: 'Login'
+        },
+        {
+            path: '/join',
+            component: ()=> import('../views/Join.vue'),
+            name: 'Join'
         }
     ]
 })

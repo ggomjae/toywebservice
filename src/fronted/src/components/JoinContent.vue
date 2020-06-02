@@ -1,7 +1,7 @@
 <template>
     <div>
         <fieldset>
-            <legend>LOGIN</legend>
+            <legend>Join</legend>
             <div>
                 <div>
                     <label>
@@ -13,16 +13,18 @@
                         <input type="password" v-model="password" placeholder="Password">
                     </label>
                 </div>
-                <span id ="subBtn" @click="onSubmit(email,password)"/>
-                Login
+                <span id ="subBtn" @click="joinSubmit()"/>
+                Join
             </div>
         </fieldset>
     </div>
 </template>
 
 <script>
+    import axios from "axios";
+
     export default {
-        name: "LoginContent",
+        name: "JoinContent",
         data() {
             return {
                 email: '',
@@ -30,14 +32,20 @@
                 msg: ''
             }
         },
-
         methods: {
-            onSubmit(email, password) {
-                this.$store.dispatch('LOGIN', {email, password})
-                    .then(() =>{
-                        alert("로그인성공");
-                        this.$router.push('/enter');
-                     }).catch(({message}) => this.msg = message)
+            joinSubmit() {
+                axios.post('/api/join',
+                    { email:this.email, password:this.password}
+                ).then(response => {
+                    console.log(response);
+                    alert("등록했습니다.");
+                    this.$router.push('/')
+                        .catch(err=>{
+                            console.log(err);
+                        });
+                }).catch((ex) => {
+                    console.warn("ERROR!!!!! : ",ex)
+                })
             }
         }
     }
