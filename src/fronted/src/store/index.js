@@ -4,9 +4,9 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-//const resourceHost = 'http://localhost:9001';
 
 export const store = new Vuex.Store({
+
     state: {
         accessToken: null
     },
@@ -14,8 +14,9 @@ export const store = new Vuex.Store({
 
     },
     mutations: {
-        LOGIN (state, {accessToken}) {
+        LOGIN (state, accessToken) {
             state.accessToken = accessToken;
+            localStorage.setItem("accessToken",accessToken);
         },
         LOGOUT (state) {
             state.accessToken = null
@@ -24,16 +25,26 @@ export const store = new Vuex.Store({
     actions: {
         LOGIN ({commit}, {email, password}) {
             return axios.post(`/api/login`, {email, password})
-                .then(({data}) => {
-                        alert(data);
-                        commit('LOGIN', data);
+                .then((data) => {
+                        alert(`Bearer ${data.data}`);
+                        commit('LOGIN', data.data);
+                        axios.defaults.headers.common['Authorization'] = `Bearer ${data.data}`;
                     }
                 )
         },
         LOGOUT ({commit}) {
             commit('LOGOUT')
-        },
+        }
     }
 });
 
+const tokenRefrash = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) return
+
+    alert(accessToken);
+    axios.defaults.headers.common['Authorization'] = accessToken;
+}
+
+tokenRefrash();
 

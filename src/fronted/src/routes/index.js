@@ -3,13 +3,17 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
+// VueRouter.before(function (to,from,next) {
+//     console.log('코바와')
+// })
+
 export const router = new VueRouter({
     mode: 'history',
     routes: [
         {
             path: '/enter',
             component: ()=> import('../views/Enter.vue'),
-            name: 'Enter'
+            name: 'Enter',
         },
         {
             path: '/board',
@@ -57,4 +61,4 @@ export const router = new VueRouter({
             name: 'Join'
         }
     ]
-})
+});

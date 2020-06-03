@@ -28,6 +28,7 @@ vue + springboot + jpa
 >11.keep-alive를 이용한 component data 유지 -> 나중에 vuex를 이용하여 수정 예정<br>
 >12.Gmail SMTP, MailSender을 이용하여 관리자에게 Gmail 보내기<br>
 >13.Spring Security JWT를 이용한 로그인 구현. 현재 : 로그인 후 JWT 생성 -> 반환 [ 진행 중 ] <br>
+>14.vue 새로 고침 -> localstorage Token 값 복구 <br>
 
 ### Screenshots 과 세부 내용
 <br>
@@ -408,7 +409,7 @@ mutations: {
         },
     }
 ```
-* ```Vuex```를 이용한 JWT 보관 + 새로고침으로 인한 없어짐으로 LocalStorage로 구현 [아직 구현 중]
+* ```Vuex```를 이용한 JWT 보관 + 새로고침으로 인한 없어짐으로 LocalStorage로 구현 
     * ```mutations + actions```를 이용한 Vuex 저장
 
 <br>
@@ -503,6 +504,7 @@ public class JwtAuthenticationFilter extends GenericFilterBean {
 
         chain.doFilter(request, response);
     }
+}
 
 [User]
 @Entity
@@ -528,6 +530,27 @@ public class CustomUserDetailService implements UserDetailsService {
 * ```Spring Security + JWT```를 이용한 로그인 구현 
     * ```http webconfig```를 이용한 접근에 따른 권한 구현 REST API [아직 구현 중]
 
+<br>
+
+> **[2020.06.03] : 14 vue 새로 고침 -> localstorage Token 값 복구**<br>
+<div>
+    <img height="300" src = "https://user-images.githubusercontent.com/43604493/83640395-08176200-a5e7-11ea-8103-2c68c6abdb79.JPG">
+</div>
+
+<br>
+
+```bash
+[store/index.js]
+const tokenRefrash = () => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (!accessToken) return
+
+    alert(accessToken);
+    axios.defaults.headers.common['Authorization'] = accessToken;
+}
+
+tokenRefrash();
+```
 <br>
 
 ### 다음 개발 단계  + README 
