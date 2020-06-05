@@ -1,6 +1,6 @@
 Fan of Celebrity webservice
 ==================== 
-vue + springboot + jpa 
+vue + springboot + jpa + aws service
 ------------ 
 ### Project Description    
 > '김다미'배우에 대한 팬 운영 사이트. Vue.js, SpringBoot , ORM JPA, Maria DB를 이용.<br> 

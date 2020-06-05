@@ -4,11 +4,11 @@ import axios from 'axios';
 
 Vue.use(Vuex);
 
-
 export const store = new Vuex.Store({
 
     state: {
-        accessToken: null
+        accessToken: null,
+        loginEmail : null
     },
     getters: {
 
@@ -27,6 +27,8 @@ export const store = new Vuex.Store({
             return axios.post(`/api/login`, {email, password})
                 .then((data) => {
                         alert(`Bearer ${data.data}`);
+                        this.state.loginEmail = email;
+                        alert(this.state.loginEmail);
                         commit('LOGIN', data.data);
                         axios.defaults.headers.common['Authorization'] = `Bearer ${data.data}`;
                     }
@@ -40,7 +42,17 @@ export const store = new Vuex.Store({
 
 const tokenRefrash = () => {
     const accessToken = localStorage.getItem("accessToken");
-    if (!accessToken) return
+    if (!accessToken)
+        return
+
+    axios.post('/api/user',accessToken)
+        .then((response) =>{
+            alert(response.data);
+            store.state.loginEmail = response.data;
+        })
+        .catch((err) => {
+            alert(err);
+        })
 
     alert(accessToken);
     axios.defaults.headers.common['Authorization'] = accessToken;

@@ -41,10 +41,16 @@ public class UserController {
         return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
     }
 
-    @PostMapping("/api/user")
-    public String information(HttpServletRequest request){
+//    @PostMapping("/api/user")
+//    public String information(HttpServletRequest request){
+//
+//        String token = jwtTokenProvider.resolveToken(request);
+//        return jwtTokenProvider.getUserPk(token);
+//    }
 
-        String token = jwtTokenProvider.resolveToken(request);
+    @PostMapping("/api/user")
+    public String information(@RequestBody String token){
+
         return jwtTokenProvider.getUserPk(token);
     }
 
