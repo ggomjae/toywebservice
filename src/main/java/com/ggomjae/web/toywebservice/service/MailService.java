@@ -13,7 +13,9 @@ public class MailService {
     private static final String FROM_ADDRESS = "iksjsixje@gmail.com";
 
     public void mailSend(MailDto mailDto) {
+
         SimpleMailMessage message = new SimpleMailMessage();
+
         message.setTo(mailDto.getAddress());
         message.setFrom(MailService.FROM_ADDRESS);
         message.setSubject(mailDto.getTitle());

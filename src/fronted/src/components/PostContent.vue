@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="controlBtn">
-            <span class="boardBtns" @click="updateBtn">수정</span>
-            <span class="boardBtns" @click="deleteBtn">삭제</span>
+            <span class="boardBtns" v-if="postContent.author == this.user" @click="updateBtn">수정</span>
+            <span class="boardBtns" v-if="postContent.author == this.user" @click="deleteBtn">삭제</span>
         </div>
         <div>
             <fieldset id="postCss">
@@ -23,12 +23,13 @@
         <div class="controlBtn">
             <span class="Btns" @click="replyBtn">댓글</span>
         </div>
-        <div v-for="reply in replyContent" v-bind:key="reply.rno">
+
+        <div v-for="reply in replyContent" v-bind:key="reply.rno" >
             <div id ="replyField">
                 <div id="replyinformation">
                     <span id="replyauthor">{{reply.author}}</span>
                     <span id="replydate">{{moment(reply.modifiedDate).format(' YYYY.MM.DD HH:mm')}}</span>
-                    <span id="replydeleteBtn" @click="replyDeleteBtn(reply.rno)">
+                    <span id="replydeleteBtn" v-show = changeRender(reply.author) @click="replyDeleteBtn(reply.rno)">
                         삭제
                     </span>
                 </div>
@@ -49,14 +50,21 @@
         data(){
             return{
                 postContent : '',
-                replyContent : []
+                replyContent : [],
+                user : '',
+                status : false
             }
         },
         methods : {
+            changeRender(data){
+                return data == this.user;
+            },
             getRevisions() {
                 axios.get('/api/board/posts/' + this.$route.query.id)
                     .then(response => {
+                        this.user = this.$store.state.loginEmail;
                         this.postContent = response.data;
+
                         console.log('success:',response.data);
                     }).catch(e => {
                     console.log('error:', e)
@@ -65,6 +73,7 @@
             getReply(){
                 axios.get('/api/reply/all/' + this.$route.query.id)
                     .then(response => {
+
                         this.replyContent = response.data;
                         console.log('success:',response.data);
                     }).catch(e => {

@@ -3,9 +3,21 @@ import VueRouter from 'vue-router';
 
 Vue.use(VueRouter);
 
-// VueRouter.before(function (to,from,next) {
-//     console.log('코바와')
-// })
+const requireAuth = () => (to, from, next) => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken)
+        return next();
+
+    next('/');
+};
+
+const enterAuth = () => (to, from, next) => {
+    const accessToken = localStorage.getItem("accessToken");
+    if (accessToken)
+        return next('/enter');
+
+    next();
+};
 
 export const router = new VueRouter({
     mode: 'history',
@@ -14,6 +26,7 @@ export const router = new VueRouter({
             path: '/enter',
             component: ()=> import('../views/Enter.vue'),
             name: 'Enter',
+            beforeEnter: requireAuth()
         },
         {
             path: '/board',
@@ -53,12 +66,14 @@ export const router = new VueRouter({
         {
             path: '/',
             component: ()=> import('../views/Login.vue'),
-            name: 'Login'
+            name: 'Login',
+            beforeEnter: enterAuth()
         },
         {
             path: '/join',
             component: ()=> import('../views/Join.vue'),
-            name: 'Join'
+            name: 'Join',
+            beforeEnter: enterAuth()
         }
     ]
 });

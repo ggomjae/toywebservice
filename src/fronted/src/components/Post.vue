@@ -11,7 +11,7 @@
                     </div>
                     <div>
                         <label>
-                            <input type="text" v-model="author" placeholder="AUTHOR"/>
+                            <input class="authorColor" type="text" v-model="author" v-bind:placeholder="author" :readonly="true" />
                         </label>
                     </div>
                     <div>
@@ -51,9 +51,12 @@
                             console.log(err);
                         });
                 }).catch((ex) => {
-                    console.warn("ERROR!!!!! : ",ex)
+                    console.warn("ERROR!!!!! : ",ex);
                 })
             }
+        },
+        mounted() {
+            this.author = this.$store.state.loginEmail;
         }
     }
 </script>
@@ -102,6 +105,10 @@
         background-size: cover;
         margin-bottom: 0;
         cursor: pointer;
+    }
+
+    .authorColor{
+        background: #e3d2d2;
     }
 
     input{

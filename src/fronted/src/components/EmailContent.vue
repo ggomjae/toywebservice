@@ -5,7 +5,7 @@
             <div>
                 <div>
                     <label>
-                        <input type="text" v-model="address" placeholder="이메일 주소">
+                        <input type="text" class="addressColor" v-bind:placeholder="address" :readonly="true">
                     </label>
                 </div>
                 <div>
@@ -49,6 +49,9 @@
                     console.log(err);
                 });
             }
+        },
+        mounted() {
+            this.address = this.$store.state.loginEmail;
         }
     }
 </script>
@@ -106,6 +109,10 @@
     textarea{
         height: 130px;
         width: 280px;
+    }
+
+    .addressColor{
+        background: #e3d2d2;
     }
 
     @media screen and (min-width: 600px){

@@ -5,7 +5,7 @@
             <div>
                 <div>
                     <label>
-                        <input type="text" v-model="author" placeholder="AUTHOR"/>
+                        <input type="text" class="replyColor" v-bind:placeholder="author" :readonly="true"/>
                     </label>
                 </div>
                 <div>
@@ -47,6 +47,9 @@
                     console.warn("ERROR!!!!! : ",ex)
                 })
             }
+        },
+        mounted() {
+            this.author = this.$store.state.loginEmail;
         }
     }
 </script>
@@ -61,6 +64,10 @@
         padding:5px 10px;
         font-family:Helvetica, sans-serif;
         font-weight:bold;
+    }
+
+    .replyColor{
+        background: #e3d2d2;
     }
 
     fieldset {
