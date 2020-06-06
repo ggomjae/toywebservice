@@ -7,6 +7,7 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
+
 import lombok.NoArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
@@ -20,8 +21,9 @@ import java.io.IOException;
 @Service
 @NoArgsConstructor
 public class S3Service {
-    Logger logger = LoggerFactory.getLogger(this.getClass());
+
     private AmazonS3 s3Client;
+
 
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
@@ -47,11 +49,11 @@ public class S3Service {
 
     public String upload(MultipartFile file) throws IOException {
         String fileName = file.getOriginalFilename();
-        logger.info(fileName);
-        logger.info(fileName);
-        logger.info(fileName);
+
         s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
                 .withCannedAcl(CannedAccessControlList.PublicRead));
+
+
         return s3Client.getUrl(bucket, fileName).toString();
     }
 

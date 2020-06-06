@@ -8,7 +8,8 @@ export const store = new Vuex.Store({
 
     state: {
         accessToken: null,
-        loginEmail : null
+        loginEmail : null,
+        filePath : require('../assets/kim.png')
     },
     getters: {
 
@@ -40,6 +41,15 @@ export const store = new Vuex.Store({
     }
 });
 
+const fileRefrash = () => {
+
+    const filePath = localStorage.getItem("img");
+    if(!filePath)
+        return
+    store.state.filePath = filePath;
+
+}
+
 const tokenRefrash = () => {
 
     const accessToken = localStorage.getItem("accessToken");
@@ -59,4 +69,4 @@ const tokenRefrash = () => {
 }
 
 tokenRefrash();
-
+fileRefrash();

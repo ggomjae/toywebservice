@@ -42,5 +42,4 @@ public class FileController {
 
         return s3Service.upload(multipartFile);
     }
-
 }

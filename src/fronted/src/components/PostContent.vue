@@ -1,8 +1,8 @@
 <template>
     <div>
         <div class="controlBtn">
-            <span class="boardBtns" v-if="postContent.author == this.user" @click="updateBtn">수정</span>
-            <span class="boardBtns" v-if="postContent.author == this.user" @click="deleteBtn">삭제</span>
+            <span class="boardBtns" v-if="checkUser()" @click="updateBtn">수정</span>
+            <span class="boardBtns" v-if="checkUser()" @click="deleteBtn">삭제</span>
         </div>
         <div>
             <fieldset id="postCss">
@@ -29,7 +29,7 @@
                 <div id="replyinformation">
                     <span id="replyauthor">{{reply.author}}</span>
                     <span id="replydate">{{moment(reply.modifiedDate).format(' YYYY.MM.DD HH:mm')}}</span>
-                    <span id="replydeleteBtn" v-show = changeRender(reply.author) @click="replyDeleteBtn(reply.rno)">
+                    <span id="replydeleteBtn" v-show = changeRender(reply.author) @click="replyDeleteBtn(reply.rno,reply.author)">
                         삭제
                     </span>
                 </div>
@@ -56,6 +56,9 @@
             }
         },
         methods : {
+            checkUser(){
+                return this.postContent.author == this.user;
+            },
             changeRender(data){
                 return data == this.user;
             },
@@ -98,7 +101,12 @@
                     alert(e);
                 })
             },
-            replyDeleteBtn(param){
+            replyDeleteBtn(param,param_two){
+                if(param_two != this.user){
+                    alert("삭제할수없습니다");
+                    return;
+                }
+
                 axios.delete('/api/reply/delete/'+param)
                     .then(response => {
                         console.log('success:',response);

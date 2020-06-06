@@ -23,8 +23,8 @@
                  </li>
             </ul>
         </div>
-            <input type="file" ref="file" v-on:change="handleFileUpload()">
-            <button  v-on:click="fileSubmit()">
+            <input type="file" ref="file" v-if="checkUser()" v-on:change="handleFileUpload()">
+            <button  v-if="checkUser()" v-on:click="fileSubmit()">
                 Submit
             </button>
     </div>
@@ -45,12 +45,15 @@
                     Education: "인천대학교"
                 },
                 file : '',
-                //imgData : require('../assets/kimdami.png')
+                //imgData : require('../assets/kim.png')
                 imgData : ''
                 //만약 url을 갖고온다면  그냥 '' 에넣으면 된다
             }
         },
         methods : {
+            checkUser(){
+                return this.$store.state.loginEmail == "iksjsixje@gmail.com";
+            },
             fileSubmit(){
                 let formData = new FormData();
                 formData.append('file',this.file);
@@ -61,6 +64,8 @@
                     }
                 }).then( response =>{
                         this.reset();
+                        localStorage.setItem("img",response.data);
+                        this.$store.state.filePath = response.data;
                         this.imgData = response.data;
                         console.log(response);
                 }).catch( err => {
@@ -69,7 +74,8 @@
             },
             handleFileUpload() {
 
-                if(this.imgData !== '') {
+                if(this.imgData !== '/img/kim.png') {
+                    localStorage.removeItem("img");
                     axios.post('/api/removeFile', { imgPath: this.imgData
                         })
                         .then(response => {
@@ -85,6 +91,9 @@
                 const input = this.$refs.file;
                 input.type = 'file';
             }
+        },
+        mounted() {
+            this.imgData = this.$store.state.filePath;
         }
     }
 </script>
@@ -95,7 +104,6 @@
         display: inline-block;
         width: 250px;
         height: 250px;
-        border: 1px solid purple;
     }
     .profileContainer{
         text-align: center

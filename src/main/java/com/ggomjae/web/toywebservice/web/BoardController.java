@@ -52,7 +52,7 @@ public class BoardController {
 
     @GetMapping("/api/board/all")
     public List<PostsListResponseDto> findAllPosts(){
-        logger.info("ggomjae");
+
         List<PostsListResponseDto> postAll = postsService.findAllDesc();
 
         return postAll;
