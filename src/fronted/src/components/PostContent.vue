@@ -9,13 +9,16 @@
                 <legend id="postLegend">POST</legend>
                 <div>
                     <div>
-                        {{postContent.title}}
+                        <span class ="pc">Title </span>
+                         : {{postContent.title}}
                     </div>
                     <div>
-                        {{postContent.author}}
+                        <span class ="pc">Author </span>
+                         : {{postContent.author}}
                     </div>
                     <div>
-                        {{postContent.content}}
+                        <span class ="pc">Content </span>
+                         : {{postContent.content}}
                     </div>
                 </div>
             </fieldset>
@@ -135,6 +138,11 @@
 </script>
 
 <style scoped>
+
+    .pc{
+        color: #2F3B52;
+    }
+
     #postLegend {
         color:#2F3B52;
         font-size:16px;

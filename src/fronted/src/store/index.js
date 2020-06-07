@@ -41,15 +41,6 @@ export const store = new Vuex.Store({
     }
 });
 
-const fileRefrash = () => {
-
-    const filePath = localStorage.getItem("img");
-    if(!filePath)
-        return
-    store.state.filePath = filePath;
-
-}
-
 const tokenRefrash = () => {
 
     const accessToken = localStorage.getItem("accessToken");
@@ -69,4 +60,4 @@ const tokenRefrash = () => {
 }
 
 tokenRefrash();
-fileRefrash();
+

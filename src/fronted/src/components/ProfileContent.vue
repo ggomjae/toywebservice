@@ -52,7 +52,7 @@
         },
         methods : {
             checkUser(){
-                return this.$store.state.loginEmail == "iksjsixje@gmail.com";
+                return this.$store.state.loginEmail == "ggomjae@gmail.com";
             },
             fileSubmit(){
                 let formData = new FormData();
@@ -64,10 +64,17 @@
                     }
                 }).then( response =>{
                         this.reset();
-                        localStorage.setItem("img",response.data);
                         this.$store.state.filePath = response.data;
                         this.imgData = response.data;
-                        console.log(response);
+
+                        axios.post('/api/file',
+                             { filePath:this.imgData, profileValue:1}
+                        ).then(response => {
+                            alert("등록했습니다.");
+                            console.log(response);
+                        }).catch((ex) => {
+                             console.warn("ERROR!!!!! : ",ex)
+                        })
                 }).catch( err => {
                         console.log(err);
                     });
@@ -75,7 +82,7 @@
             handleFileUpload() {
 
                 if(this.imgData !== '/img/kim.png') {
-                    localStorage.removeItem("img");
+
                     axios.post('/api/removeFile', { imgPath: this.imgData
                         })
                         .then(response => {
@@ -90,10 +97,19 @@
             reset() {
                 const input = this.$refs.file;
                 input.type = 'file';
+            },
+            getRevisions() {
+                axios.get('/api/file/' + 1)
+                    .then(response => {
+                        this.imgData = response.data.filePath;
+                        console.log('success:',response.data.filePath);
+                    }).catch(e => {
+                    console.log('error:', e)
+                })
             }
         },
         mounted() {
-            this.imgData = this.$store.state.filePath;
+            this.getRevisions();
         }
     }
 </script>

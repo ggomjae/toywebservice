@@ -8,11 +8,19 @@ import com.amazonaws.services.s3.AmazonS3ClientBuilder;
 import com.amazonaws.services.s3.model.CannedAccessControlList;
 import com.amazonaws.services.s3.model.PutObjectRequest;
 
+import com.ggomjae.web.toywebservice.domain.Profile.Profile;
+import com.ggomjae.web.toywebservice.domain.Profile.ProfileRepository;
+import com.ggomjae.web.toywebservice.web.dto.ProfileRequestDto;
+import com.ggomjae.web.toywebservice.web.dto.ProfileResponseDto;
 import lombok.NoArgsConstructor;
+
+import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.annotation.PostConstruct;
@@ -23,7 +31,7 @@ import java.io.IOException;
 public class S3Service {
 
     private AmazonS3 s3Client;
-
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Value("${cloud.aws.credentials.accessKey}")
     private String accessKey;
