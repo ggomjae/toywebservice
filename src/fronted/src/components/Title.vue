@@ -1,7 +1,9 @@
 <template>
     <div>
-        <h1><span id = 'titleImage' v-on:click="gotoEnter"></span>
-            DaSa 2
+        <h1>
+            <span id = 'titleImage' v-on:click="gotoEnter"></span>
+            DaSa2
+            <button id="logoutBtn" @click.prevent="onClickLogout">l.o</button>
         </h1>
     </div>
 </template>
@@ -15,6 +17,9 @@
                     .catch(err=>{
                         console.log(err);
                     })
+            },
+            onClickLogout : function(){
+                this.$store.dispatch('LOGOUT').then(() => this.$router.push('/'))
             }
         }
     }
@@ -47,6 +52,10 @@
 
     #titleImage:hover{
         cursor: pointer;
+    }
+
+    #logoutBtn{
+        margin-left: 1.1rem;
     }
 
 </style>

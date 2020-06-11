@@ -553,6 +553,14 @@ tokenRefrash();
 ```
 <br>
 
+>**[2020.06.11] : jwt를 이용한 로그인 + AWS s3 이용한 file upload 까지 영상** <br>
+
+<br>
+
+<iframe width="640" height="360" src="https://www.youtube.com/watch?v=-ynV8PHtFPo" frameborder="0" gesture="media" allowfullscreen=""></iframe>
+
+<br>
+
 ### 다음 개발 단계  + README 
 <br>
 
