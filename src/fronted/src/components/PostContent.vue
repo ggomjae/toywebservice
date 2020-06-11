@@ -6,19 +6,13 @@
         </div>
         <div>
             <fieldset id="postCss">
-                <legend id="postLegend">POST</legend>
+                <legend id="postLegend">{{postContent.title}}</legend>
                 <div>
                     <div>
-                        <span class ="pc">Title </span>
-                         : {{postContent.title}}
+                        <span id="authorCss" class ="pc">{{postContent.author}}</span>
                     </div>
                     <div>
-                        <span class ="pc">Author </span>
-                         : {{postContent.author}}
-                    </div>
-                    <div>
-                        <span class ="pc">Content </span>
-                         : {{postContent.content}}
+                        <span class ="pc">{{postContent.content}} </span>
                     </div>
                 </div>
             </fieldset>
@@ -114,10 +108,14 @@
                     .then(response => {
                         console.log('success:',response);
                         alert('지웠습니다.');
-                        router.replace('/board')
-                            .catch(e => {
-                                console.log('error:',e);
-                            })
+                        // router.replace('/board')
+                        //     .catch(e => {
+                        //         console.log('error:',e);
+                        //     })
+                        const itemToFind = this.replyContent.find(function(item) {return item.rno === param});
+                        const idx = this.replyContent.indexOf(itemToFind) ;
+                        if (idx > -1)
+                            this.replyContent.splice(idx, 1)
                     }).catch(e => {
                     console.log('error:', e);
                     alert(e);
@@ -139,6 +137,10 @@
 
 <style scoped>
 
+    #authorCss{
+        font-weight: bold;
+    }
+
     .pc{
         color: #2F3B52;
     }
@@ -156,7 +158,7 @@
     #postCss {
         font-family:Helvetica, sans-serif;
         border-radius:10px;
-        background: #F6F6F8;
+        background: #b5d592;
         padding:20px;
         border-color:lightgray;
         margin: 0 auto;
