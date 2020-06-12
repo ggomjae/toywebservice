@@ -31,37 +31,44 @@ export const router = new VueRouter({
         {
             path: '/board',
             component: ()=> import('../views/Board.vue'),
-            name: 'Board'
+            name: 'Board',
+            beforeEnter: requireAuth()
         },
         {
             path: '/profile',
             component: ()=> import('../views/Profile.vue'),
-            name: 'Profile'
+            name: 'Profile',
+            beforeEnter: requireAuth()
         },
         {
             path: '/save',
             component: ()=> import('../views/Save.vue'),
-            name: 'Save'
+            name: 'Save',
+            beforeEnter: requireAuth()
         },
         {
             path: '/content',
             component: ()=> import('../views/Content.vue'),
-            name: 'Content'
+            name: 'Content',
+            beforeEnter: requireAuth()
         },
         {
             path: '/update',
             component: ()=> import('../views/Update.vue'),
-            name: 'Update'
+            name: 'Update',
+            beforeEnter: requireAuth()
         },
         {
             path: '/reply',
             component: ()=> import('../views/Reply.vue'),
-            name: 'Reply'
+            name: 'Reply',
+            beforeEnter: requireAuth()
         },
         {
             path: '/email',
             component: ()=> import('../views/Email.vue'),
-            name: 'Email'
+            name: 'Email',
+            beforeEnter: requireAuth()
         },
         {
             path: '/',
