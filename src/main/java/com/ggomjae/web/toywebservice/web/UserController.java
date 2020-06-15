@@ -4,6 +4,7 @@ import com.ggomjae.web.toywebservice.config.security.JwtTokenProvider;
 import com.ggomjae.web.toywebservice.domain.user.User;
 import com.ggomjae.web.toywebservice.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -55,7 +56,8 @@ public class UserController {
     }
 
     @PostMapping("/api/test")
-    public String testMethod(){
-        return "testOK";
+    public Authentication testMethod(@RequestBody String token){
+
+        return jwtTokenProvider.getAuthentication(token);
     }
 }

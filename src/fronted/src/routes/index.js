@@ -23,6 +23,11 @@ export const router = new VueRouter({
     mode: 'history',
     routes: [
         {
+            path: '/test',
+            component: ()=> import('../views/Test.vue'),
+            name: 'Test',
+        },
+        {
             path: '/enter',
             component: ()=> import('../views/Enter.vue'),
             name: 'Enter',
