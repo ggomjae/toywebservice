@@ -4,10 +4,13 @@ import VueRouter from 'vue-router';
 Vue.use(VueRouter);
 
 const requireAuth = () => (to, from, next) => {
-    const accessToken = localStorage.getItem("accessToken");
-    if (accessToken)
-        return next();
 
+    const accessToken = localStorage.getItem("accessToken");
+
+    if (accessToken){
+
+        return next();
+    }
     next('/');
 };
 

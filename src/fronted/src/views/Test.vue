@@ -22,11 +22,23 @@
 
                 axios.post('/api/test',accessToken
                 ).then(response => {
-
                     this.test = response.data.authorities;
                 }).catch((ex) => {
                     console.warn("ERROR!!!!! : ",ex)
                 })
+
+                alert(accessToken);
+
+                axios.post('/api/validate',accessToken)
+                    .then((response) =>{
+                        if(response.data === true)
+                            alert('세션존재')
+                        else
+                            alert('세션만료')
+                    })
+                    .catch((err) => {
+                        alert(err);
+                    })
             }
         },
         created() {

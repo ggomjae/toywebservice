@@ -4,14 +4,15 @@ import com.ggomjae.web.toywebservice.config.security.JwtTokenProvider;
 import com.ggomjae.web.toywebservice.domain.user.User;
 import com.ggomjae.web.toywebservice.domain.user.UserRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.bind.annotation.GetMapping;
+
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
-import javax.servlet.http.HttpServletRequest;
 import java.util.Collections;
 import java.util.Map;
 
@@ -22,6 +23,8 @@ public class UserController {
     private final PasswordEncoder passwordEncoder;
     private final JwtTokenProvider jwtTokenProvider;
     private final UserRepository userRepository;
+
+    Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @PostMapping("/api/join")
     public Long join(@RequestBody Map<String, String> user) {
@@ -42,17 +45,17 @@ public class UserController {
         return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
     }
 
-//    @PostMapping("/api/user")
-//    public String information(HttpServletRequest request){
-//
-//        String token = jwtTokenProvider.resolveToken(request);
-//        return jwtTokenProvider.getUserPk(token);
-//    }
 
     @PostMapping("/api/user")
     public String information(@RequestBody String token){
 
         return jwtTokenProvider.getUserPk(token);
+    }
+
+    @PostMapping("/api/validate")
+    public boolean checkToken(@RequestBody String token){
+
+        return jwtTokenProvider.validateToken(token); // true면 만료x , false 면 만료o
     }
 
     @PostMapping("/api/test")
