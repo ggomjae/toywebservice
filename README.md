@@ -92,49 +92,9 @@ export const router = new VueRouter({
 
 ```vue-good-table```을 이용한 table 구현<br>
 
-```bash
-import 'vue-good-table/dist/vue-good-table.css'
-import  { VueGoodTable }  from 'vue-good-table';
-
-data: ()=>{
-            return {
-                columns: [
-                    {
-                        label: '작성자',
-                        field: 'author',
-                        sortable: false,
-                    },
-            ...
-```
 
 ```Controller,Service,JPA```를 이용한 데이터 긁기<br>
-각 구현 일부분
-```bash
-[Controller]
-@GetMapping("/api/board/all")
-public List<PostsListResponseDto> findAllPosts(){
-     logger.info("ggomjae");
-     List<PostsListResponseDto> postAll = postsService.findAllDesc();
 
-     return postAll;
-}
-
-[Service]
-@Transactional(readOnly = true)
-public List<PostsListResponseDto> findAllDesc(){
-
-     return postsRepository.findAllDesc().stream()
-             .map(PostsListResponseDto::new)
-             .collect(Collectors.toList());
-}
-
-[Repository]
-public interface ReplysRepository extends JpaRepository<Replys, Long> {
-
-    @Query("SELECT r FROM Replys r WHERE r.bno = ?1 AND r.rno > 0 ORDER BY r.rno ASC")
-    List<Replys> getReplys(Long bno);
-}
-```
 >**[2020.05.11] : 7 JPA hibernate를 이용한 Posts CRUD 기능구현**<br>
 
 <br>
@@ -202,90 +162,16 @@ configureWebpack: {
     <img height="300" src = "https://user-images.githubusercontent.com/43604493/82358843-0c1d7e80-9a42-11ea-85dd-889efa032104.JPG">
 </div>
 
-<br>
-
-```bash
-[vue]
-
-<input type="file" ref="file" v-on:change="handleFileUpload()">
-<button  v-on:click="fileSubmit()">
-            Submit
-</button>
-
-axios.post('/api/fileupload',formData,{
-        headers: {
-           'Content-Type': 'multipart/form-data'
-}
-```
 * vue를 통해 file upload, multipart를 이용하여 서버단으로 전송
-```bash
-[Filecontroller]
-@RequiredArgsConstructor
-@RestController
-public class FileController {
 
-    private final S3Service s3Service;
-
-    @PostMapping("/api/removeFile")
-    public boolean removeFile(@RequestBody String filePath){
-         ...
-
-         return false;
-    }
-
-    @PostMapping("/api/fileupload")
-        public String execWrite(@RequestParam("file") MultipartFile multipartFile)throws IOException {
-            
-        return s3Service.upload(multipartFile);
-    }
-}
-
-[S3service]
-public String upload(MultipartFile file) throws IOException {
-        String fileName = file.getOriginalFilename();
-      
-        s3Client.putObject(new PutObjectRequest(bucket, fileName, file.getInputStream(), null)
-                .withCannedAcl(CannedAccessControlList.PublicRead));
-        return s3Client.getUrl(bucket, fileName).toString();
-}   
-```
 * ```s3Service```는 ```AWS S3의 비즈니스 로직```을 담당, 파일 조작
     * service의 upload를 통해 로직 구현
     
-```bash
-if(this.imgData !== '') {
-        axios.post('/api/removeFile', { imgPath: this.imgData
-            })
-            .then(response => {
-                       console.log(response.data);
-            }).catch(e => {
-                       console.log('error:', e)
-            });
-}
-
-this.file = this.$refs.file.files[0];
-```
 * Profile upload이기 때문에 기존에 S3에 있던 file 이 있으면 삭제하기 위해 imgPath 전송
     * ```keep-alive```를  통해 data 유지, data에 있으면 axios로 전송
 
-```bash
-[FileController]
-@PostMapping("/api/removeFile")
-    public boolean removeFile(@RequestBody String filePath){
 
-        String temp = filePath;
 
-        int idx = filePath.lastIndexOf("/");
-        temp = temp.substring(idx+1);
-        idx = temp.indexOf('"');
-        String realPath = temp.substring(0,idx);
-        logger.info(realPath);
-
-        if(s3Service.delete(realPath))
-            return true;
-        return false;
-    }
-}
 
 [S3Service]
 s3Client.deleteObject(bucket, currentFilePath);
@@ -318,49 +204,6 @@ s3Client.deleteObject(bucket, currentFilePath);
     <img height="300" src = "https://user-images.githubusercontent.com/43604493/83134563-82477280-a11f-11ea-87ca-bffc298856eb.JPG">
 </div>
 
-<br>
-
-```bash
-[application.yml]
-spring:
-  mail:
-    host: smtp.gmail.com
-    port: 587
-    username: ik ~
-    password:
-    properties:
-      mail:
-        smtp:
-          auth: true
-          starttls:
-            enable: true
-
-[EmailContent.vue]
-axios.post('/api/mail',
-    { title:this.title, address:this.address, content:this.content })
-
-[MailController]
-@PostMapping("/api/mail")
-public void execMail(@RequestBody MailDto mailDto) {
-        mailService.mailSend(mailDto);
-}
-
-[mailService]
-public class MailService {
-    private JavaMailSender mailSender;
-    private static final String FROM_ADDRESS = "ik ~ @gmail.com";
-
-    public void mailSend(MailDto mailDto) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setTo(mailDto.getAddress());
-        message.setFrom(MailService.FROM_ADDRESS);
-        message.setSubject(mailDto.getTitle());
-        message.setText(mailDto.getContent());
-
-        mailSender.send(message);
-    }
-}
-```
 * ```Gmail SMTP Server```를 이용한 메일보내기 구현
     * 보내는데 5초 정도 걸림
 
@@ -371,162 +214,11 @@ public class MailService {
     <img height="300" src = "https://user-images.githubusercontent.com/43604493/83534486-d9888100-a52b-11ea-9e4a-ecb00a729ce6.JPG">
 </div>
 
-<br>
-
-[Fronted]
-```bash
-[JoinContent.vue]
-joinSubmit() {
-      axios.post('/api/join',
-           { email:this.email, password:this.password})
-                ...
-
-[LoginContent.vue]
-onSubmit(email, password) {
-      this.$store.dispatch('LOGIN', {email, password})
-                ...
-
-[/store/index.js - vuex]
-mutations: {
-        LOGIN (state, {accessToken}) {
-            state.accessToken = accessToken;
-        },
-        LOGOUT (state) {
-            state.accessToken = null
-        }
-    },
-    actions: {
-        LOGIN ({commit}, {email, password}) {
-            return axios.post(`/api/login`, {email, password})
-                .then(({data}) => {
-                        alert(data);
-                        commit('LOGIN', data);
-                    }
-                )
-        },
-        LOGOUT ({commit}) {
-            commit('LOGOUT')
-        },
-    }
-```
 * ```Vuex```를 이용한 JWT 보관 + 새로고침으로 인한 없어짐으로 LocalStorage로 구현 
     * ```mutations + actions```를 이용한 Vuex 저장
 
 <br>
 
-[BackEnd]
-```bash
-[UserController]
-@PostMapping("/api/join")
-public Long join(@RequestBody Map<String, String> user) {
-     return userRepository.save(User.builder()
-             ...
-             .build()).getUserid();
-}
-
-@PostMapping("/api/login")
-public String login(@RequestBody Map<String, String> user) {
-     ...
-     return jwtTokenProvider.createToken(member.getUsername(), member.getRoles());
-}
-
-[WebSecurityConfig]
-RequiredArgsConstructor
-@EnableWebSecurity
-public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
-
-    private final JwtTokenProvider jwtTokenProvider;
-
-    @Bean
-    public PasswordEncoder passwordEncoder() {
-        return PasswordEncoderFactories.createDelegatingPasswordEncoder();
-    }
-
-    @Bean
-    @Override
-    public AuthenticationManager authenticationManagerBean() throws Exception {
-        return super.authenticationManagerBean();
-    }
-
-    @Override
-    protected void configure(HttpSecurity http) throws Exception {
-        http
-                .httpBasic().disable()
-        ...
-}
-
-[JwtTokenProvider]
-@RequiredArgsConstructor
-@Component
-public class JwtTokenProvider {
-
-    ...
-
-    @PostConstruct
-    protected void init() {
-        secretKey = Base64.getEncoder().encodeToString(secretKey.getBytes());
-    }
-
-    public String createToken(String userPk, List<String> roles) {
-        ... createToken
-    }
-
-    public Authentication getAuthentication(String token) {
-        UserDetails userDetails = userDetailsService.loadUserByUsername(this.getUserPk(token));
-        return new UsernamePasswordAuthenticationToken(userDetails, "", userDetails.getAuthorities());
-    }
-
-    public String getUserPk(String token) {
-        return Jwts.parser().setSigningKey(secretKey).parseClaimsJws(token).getBody().getSubject();
-    }
-
-    public String resolveToken(HttpServletRequest request) {
-        return request.getHeader("X-AUTH-TOKEN");
-    }
-
-    public boolean validateToken(String jwtToken) {
-       ...
-    }
-}
-
-[JwtAuthenticationFilter]
-@RequiredArgsConstructor
-public class JwtAuthenticationFilter extends GenericFilterBean {
-
-    ...
-
-    @Override
-    public void doFilter(ServletRequest request, ServletResponse response, FilterChain chain) throws IOException, ServletException {
-
-        String token = jwtTokenProvider.resolveToken((HttpServletRequest) request);
-
-        ... 예외        
-
-        chain.doFilter(request, response);
-    }
-}
-
-[User]
-@Entity
-public class User implements UserDetails {
-      ... 생략 : UserDetails 상속받는게 중요
-}
-
-[CustomUserDetailService]
-@RequiredArgsConstructor
-@Service
-public class CustomUserDetailService implements UserDetailsService {
-
-    private final UserRepository userRepository;
-
-    @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
-        return userRepository.findByEmail(username)
-                .orElseThrow(() -> new UsernameNotFoundException("사용자를 찾을 수 없습니다."));
-    }
-
-}
-```
 * ```Spring Security + JWT```를 이용한 로그인 구현 
     * ```http webconfig```를 이용한 접근에 따른 권한 구현 REST API [아직 구현 중]
 
