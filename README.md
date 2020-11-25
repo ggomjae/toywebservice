@@ -5,7 +5,7 @@ vue + springboot + jpa + aws service
 ### Project Description    
 > '김다미'배우에 대한 팬 운영 사이트. Vue.js, SpringBoot , ORM JPA, Maria DB를 이용.<br> 
 > 배우 스케쥴을 관리자가 올려주고 사용자가 댓글을 다는 CRUD 게시판 구현. <br>
-> AWS S3를 이용한 Profile file upload, AWS EC2를 이용해서 배포 및 운영.  <br>
+> AWS S3를 이용한 Profile file upload <br>
 > 관리자에게 건의할 수 있는 옵션 추가. ( + gmail ) <br>
 > 모바일 웹으로 개발된 애플리케이션이 특징.<br>
 > 앞단 Vue, 뒷단 Springboot REST API SERVER. <br>
@@ -170,15 +170,6 @@ configureWebpack: {
 * Profile upload이기 때문에 기존에 S3에 있던 file 이 있으면 삭제하기 위해 imgPath 전송
     * ```keep-alive```를  통해 data 유지, data에 있으면 axios로 전송
 
-
-
-
-[S3Service]
-s3Client.deleteObject(bucket, currentFilePath);
-```
-* File형태가 아닌 String 형태로 전송했기 때문에 ```lastIndexOf```와 ```Substring```으로 FilePath 구함
-    * FilePath를 ```s3Service.delete``` 를 통해 로직 실행
-
 <br>
 
 > **[2020.05.19] : 11 keep-alive를 이용한 component data 유지**<br>
@@ -250,13 +241,6 @@ tokenRefrash();
 <br>
 
 https://www.youtube.com/watch?v=-ynV8PHtFPo
-
-<br>
-
-### 다음 개발 단계  + README 
-<br>
-
-> REST API 권한에 따른 구현 
 
 ### 끝맺음
 <br>
