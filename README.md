@@ -1,4 +1,4 @@
-Fan of Celebrity webservice
+Fan of Celebrity webservice 🐻
 ==================== 
 vue + springboot + jpa + aws service
 ------------ 
